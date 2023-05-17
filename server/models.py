@@ -1,7 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from config import db, bcrypt
+from config import bcrypt, db
 
 playlist_songs = db.Table('playlist_songs',
                           db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),

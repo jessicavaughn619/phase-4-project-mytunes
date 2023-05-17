@@ -28,6 +28,8 @@ werkzeug = "==2.3.4"
 zipp = "==3.15.0"
 bcrypt = "*"
 flask-bcrypt = "*"
+python-dotenv = "*"
+honcho = "*"
 
 [dev-packages]
 
