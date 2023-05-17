@@ -1,11 +1,11 @@
-from flask import Flask, request, session
+from flask import request, session
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db, api
-from models import db, User, Playlist, Song, Artist, playlist_songs
+from models import User, Playlist, Song, Artist, playlist_songs
 
-class SignUp(Resource):
+class Signup(Resource):
     def post(self):
         request_json = request.get_json()
 
@@ -28,7 +28,7 @@ class SignUp(Resource):
         except IntegrityError:
             return {'error': '422 Unprocessable Entity'}, 422
 
-api.add_resource(SignUp, '/signup', endpoint='signup')
+api.add_resource(Signup, '/signup', endpoint='signup')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
