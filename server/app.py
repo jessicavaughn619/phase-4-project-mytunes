@@ -1,9 +1,19 @@
-from flask import request, session
-from flask_restful import Resource
+from dotenv import load_dotenv
+load_dotenv()
+
+from flask import request, session, jsonify, make_response, render_template
+from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
-from config import app, db, api
+from config import app, db
 from models import User, Playlist, Song, Artist, playlist_songs
+
+@app.route('/')
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
+
+api = Api(app)
 
 class Signup(Resource):
     def post(self):
@@ -29,6 +39,3 @@ class Signup(Resource):
             return {'error': '422 Unprocessable Entity'}, 422
 
 api.add_resource(Signup, '/signup', endpoint='signup')
-
-if __name__ == '__main__':
-    app.run(port=5555, debug=True)
