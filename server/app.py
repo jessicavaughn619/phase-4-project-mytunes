@@ -1,17 +1,12 @@
-import os
+from flask import Flask, request, session
+from flask_restful import Resource
+from sqlalchemy.exc import IntegrityError
 
-from flask import Flask, make_response, jsonify
-from flask_migrate import Migrate
-from flask_restful import Api, Resource
+from config import app, db, api
+from models import db, User, Playlist, Song, Artist, playlist_songs
 
-from models import db
+class SignUp(Resource):
+    def get(self):
+        pass
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
-
-migrate = Migrate(app, db)
-db.init_app(app)
-
-api = Api(app)
+api.add_resource(SignUp, '/signup')
