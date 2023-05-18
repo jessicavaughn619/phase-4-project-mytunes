@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SignUpForm from "./SignUpForm";
 
 function LoginForm({ onLogin }) {
     const [username, setUsername] = useState("");
@@ -20,38 +21,47 @@ function LoginForm({ onLogin }) {
         if (r.ok) {
           r.json().then((user) => onLogin(user));
         } else {
-          r.json().then((err) => setErrors(err.errors));
+          r.json().then((err) => setErrors(err));
         }
       });
     }
+
+    function handleClick(event) {
+      if (event.target.value === "signup") return <SignUpForm />
+    }
   
     return (
-      <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br></br>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br></br>
-          <button variant="fill" color="primary" type="submit">
-            {isLoading ? "Loading..." : "Login"}
-          </button>
-          {errors.map((err) => (
-            console.log(err)
-          ))}
-      </form>
+      <div>
+      <p>Login to MyTunes</p>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              autoComplete="off"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            </div>
+            <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            </div>
+            <button variant="fill" color="primary" type="submit">
+              {isLoading ? "Loading..." : "Login"}
+            </button>
+            <div>
+              {errors.error}
+            </div>
+        </form>
+      </div>
     );
   }
   

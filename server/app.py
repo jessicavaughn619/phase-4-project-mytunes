@@ -9,7 +9,7 @@ api = Api(app)
 
 @app.route('/')
 def index():
-    return '<h1>Welcome to my page!</h1>'
+    return '<h1>Back End Development</h1>'
 
 class Users(Resource):
     def get(self):
@@ -62,6 +62,7 @@ class Login(Resource):
 
                 session['user_id'] = user.id
                 return user.to_dict(), 200
+            return {'error': 'Incorrect password.'}, 401
 
         return {'error': '401 Unauthorized'}, 401
 

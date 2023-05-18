@@ -28,53 +28,58 @@ function SignUpForm({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => onLogin(user));
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => setErrors(err));
       }
     });
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <br></br>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-        />
-        <br></br>
-        <label htmlFor="password">Password Confirmation</label>
-        <input
-          type="password"
-          id="password_confirmation"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          autoComplete="current-password"
-        />
-        <br></br>
-        <label htmlFor="imageUrl">Profile Image</label>
-        <input
-          type="text"
-          id="imageUrl"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
-        <br></br>
-        <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
-        {errors.map((err) => (
-          console.log(err)
-        ))}
-    </form>
+    <div>
+    <p>New to MyTunes? Sign up here!</p>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            autoComplete="off"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </div>
+          <label htmlFor="password">Password Confirmation</label>
+          <input
+            type="password"
+            id="password_confirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            autoComplete="current-password"
+          />
+        <div>
+          <label htmlFor="imageUrl">Profile Image</label>
+          <input
+            type="text"
+            id="imageUrl"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+        </div>
+          <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+          <div>
+            {errors.error}
+          </div>
+      </form>
+    </div>
   );
 }
 

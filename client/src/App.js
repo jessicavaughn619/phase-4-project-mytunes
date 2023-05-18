@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavBar from './components/NavBar';
 import LoginForm from './components/LoginForm';
-
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -16,15 +16,18 @@ function App() {
     });
   }, []);
 
-  if (!user) return <LoginForm onLogin={setUser} />;
-
   return (
     <>
+    {user ?
+    <div>
       <NavBar user={user} setUser={setUser} />
-      <main>
-          <Route path="/">
-          </Route>
-      </main>
+      <Link to="/">Home</Link>
+    </div> :
+    <div>
+      <Link to="/signup" exact component={() => <SignUpForm />}>Sign Up</Link>
+      <Link to="/login" exact Component={() => <LoginForm onLogin={setUser}/>}>Login</Link>
+    </div>
+    }
     </>
   )
 }
