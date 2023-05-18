@@ -1,16 +1,25 @@
 from flask import request, session, jsonify, make_response, render_template
 from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
+from flask_cors import CORS
 
 from config import app, db
 from models import User, Playlist, Song, Artist, playlist_songs
 
-@app.route('/')
-@app.route('/<int:id>')
-def index(id=0):
-    return render_template("index.html")
-
 api = Api(app)
+
+CORS(app)
+
+@app.route('/')
+def index():
+    return '<h1>Welcome to my page!</h1>'
+
+@app.route('/users', methods=['GET'])
+def users():
+    response_dict = {
+        "text": "Users will go here"
+    }
+    return make_response(jsonify(response_dict), 200)
 
 class Signup(Resource):
     def post(self):
