@@ -1,30 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Signup } from './components/Signup';
+import { Route } from "react-router-dom";
+import NavBar from './components/NavBar';
+import LoginForm from './components/LoginForm';
 
 
 function App() {
-  useEffect(() => {
-    fetch("/signup")
-    .then((r) => r.json())
-  }, [])
+  const [user, setUser] = useState(null);
 
-  // function App() {
-  //   useEffect(() => {
-  //     fetch("/signup")
-  //     .then(r => {
-  //       if (r.ok) {
-  //         return r.json
-  //     }
-  //     throw r;
-  //   })
-  //   .then((data) => console.log(data))
-  // }, []);
-  
+  useEffect(() => {
+    fetch("/check_session").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
+  if (!user) return <LoginForm onLogin={setUser} />;
+
   return (
-    <div>
-      <Signup />
-    </div>
+    <>
+      <NavBar user={user} setUser={setUser} />
+      <main>
+          <Route path="/">
+          </Route>
+      </main>
+    </>
   )
 }
 
