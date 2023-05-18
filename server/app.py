@@ -1,6 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 from flask import request, session, jsonify, make_response, render_template
 from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
