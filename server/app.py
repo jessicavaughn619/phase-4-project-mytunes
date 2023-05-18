@@ -1,25 +1,20 @@
 from flask import request, session, jsonify, make_response, render_template
 from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
-from flask_cors import CORS
 
 from config import app, db
-from models import User, Playlist, Song, Artist, playlist_songs
+from models import User
 
 api = Api(app)
-
-CORS(app)
 
 @app.route('/')
 def index():
     return '<h1>Welcome to my page!</h1>'
 
-@app.route('/users', methods=['GET'])
-def users():
-    response_dict = {
-        "text": "Users will go here"
-    }
-    return make_response(jsonify(response_dict), 200)
+class Users(Resource):
+    def get(self):
+        users = [user.to_dict() for user in User.query.all()]
+        return make_response(jsonify(users), 200)
 
 class Signup(Resource):
     def post(self):
@@ -44,4 +39,5 @@ class Signup(Resource):
         except IntegrityError:
             return {'error': '422 Unprocessable Entity'}, 422
 
+api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Signup, '/signup', endpoint='signup')
