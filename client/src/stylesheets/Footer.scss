@@ -1,10 +1,11 @@
 @import "../utilities/variables";
 
 #footer {
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    background: $color-bright;
-    color: white;
-    padding: 10px;
-  }
+  text-align: center;
+  position: sticky;
+  top: 100vh;
+  background: $color-bright;
+  color: white;
+  padding: .5rem;
+  margin: 1rem;
+}

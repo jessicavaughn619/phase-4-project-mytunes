@@ -18,6 +18,7 @@ function App() {
   }, []);
 
   return (
+    <>
     <div id="app-container-wrapper">
     {user ?
     <div id="app-container-logged-in">
@@ -27,13 +28,18 @@ function App() {
     <div id="app-container-not-logged-in">
       <h1>Welcome to MyTunes!</h1>
       <div id="links">
-      <Link to="/login" exact Component={() => <LoginForm onLogin={setUser}/>}>Login</Link>
-      <Link to="/signup" exact component={() => <SignUpForm />}>Sign Up</Link>
+        <div id="login-link">
+        <Link to="/login" exact Component={() => <LoginForm onLogin={setUser}/>}>Login</Link>
+        </div>
+        <div id="signup-link">
+          <Link to="/signup" exact component={() => <SignUpForm />}>Sign Up</Link>
+        </div>
       </div>
     </div>
     }
-    <Footer />
     </div>
+    <Footer />
+    </>
   )
 }
 

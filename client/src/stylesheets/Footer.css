@@ -1,10 +1,11 @@
 #footer {
   text-align: center;
-  position: relative;
-  bottom: 0;
+  position: sticky;
+  top: 100vh;
   background: #FF78A8;
   color: white;
-  padding: 10px;
+  padding: 0.5rem;
+  margin: 1rem;
 }
 
 /*# sourceMappingURL=Footer.css.map */

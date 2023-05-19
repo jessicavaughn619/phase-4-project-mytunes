@@ -1,3 +1,31 @@
+#signupform-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #FF78A8;
+  border: 1rem solid #FFEF45;
+  color: white;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+  padding: 2rem;
+}
 
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+#submit-button {
+  text-align: center;
+  padding: 1rem;
+}
+
+button {
+  font-size: 16px;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=SignUpForm.css.map */
