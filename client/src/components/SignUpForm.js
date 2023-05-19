@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import '../stylesheets/SignUpForm.scss';
 
 function SignUpForm({ onLogin }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -38,6 +40,26 @@ function SignUpForm({ onLogin }) {
     <div id="signupform-container-wrapper">
     <h2>New to MyTunes? Sign up here!</h2>
       <form onSubmit={handleSubmit}>
+      <div id="first_name_input">
+          <label htmlFor="first_name">First Name</label>
+          <input
+            type="text"
+            id="first_name"
+            autoComplete="off"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div id="last_name_input">
+          <label htmlFor="last_name">Last Name</label>
+          <input
+            type="text"
+            id="last_name"
+            autoComplete="off"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
         <div id="username_input">
           <label htmlFor="username">Username</label>
           <input

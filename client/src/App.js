@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import Footer from './components/Footer';
+import Home from './components/Home';
 import './stylesheets/App.scss';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
     {user ?
     <div id="app-container-logged-in">
       <NavBar setUser={setUser} />
-      <Link to="/">Home</Link>
+      <Home />
     </div> :
     <div id="app-container-not-logged-in">
       <h1>Welcome to MyTunes!</h1>

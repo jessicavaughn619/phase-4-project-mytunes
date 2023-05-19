@@ -1,6 +1,7 @@
 from random import choice as rc
 from faker import Faker
 
+
 from config import db, app
 from models import User, Song, Artist, Playlist
 
@@ -17,8 +18,10 @@ with app.app_context():
     users = []
     for n in range(10):
         user = User(
-            username=fake.name(),
-            image_url="Hello"
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            username=fake.user_name(),
+            image_url=fake.image_url()
             )
         users.append(user)
     db.session.add_all(users)

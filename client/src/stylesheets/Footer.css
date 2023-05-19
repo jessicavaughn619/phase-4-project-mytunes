@@ -2,10 +2,11 @@
   text-align: center;
   position: sticky;
   top: 100vh;
-  background: #FF78A8;
+  background: #5EDFFF;
+  border: 1rem solid #FFEF45;
   color: white;
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 2rem;
 }
 
 /*# sourceMappingURL=Footer.css.map */
