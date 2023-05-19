@@ -1,7 +1,5 @@
 from random import choice as rc
 from faker import Faker
-
-
 from config import db, app
 from models import User, Song, Artist, Playlist
 
