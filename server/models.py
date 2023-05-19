@@ -13,6 +13,8 @@ class User(db.Model, SerializerMixin):
     serialize_rules = ('-playlists.user', '-_password_hash',)
 
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
     image_url = db.Column(db.String)

@@ -4,8 +4,9 @@
   text-align: center;
   position: sticky;
   top: 100vh;
-  background: $color-bright;
+  background: $color-primary-light;
+  border: 1rem solid $color-dark-variant;
   color: white;
   padding: .5rem;
-  margin: 1rem;
+  margin: 2rem;
 }
