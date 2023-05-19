@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../stylesheets/SignUpForm.scss';
 
 function SignUpForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -34,10 +35,10 @@ function SignUpForm({ onLogin }) {
   }
 
   return (
-    <div>
-    <p>New to MyTunes? Sign up here!</p>
+    <div id="signupform-container-wrapper">
+    <h2>New to MyTunes? Sign up here!</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div id="username_input">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -47,7 +48,7 @@ function SignUpForm({ onLogin }) {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div>
+        <div id="password-input">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -57,15 +58,17 @@ function SignUpForm({ onLogin }) {
             autoComplete="current-password"
           />
         </div>
+        <div id="password-confirmation-input">
           <label htmlFor="password">Password Confirmation</label>
           <input
             type="password"
-            id="password_confirmation"
+            id="password-confirmation"
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
             autoComplete="current-password"
           />
-        <div>
+          </div>
+        <div id="imageurl-input">
           <label htmlFor="imageUrl">Profile Image</label>
           <input
             type="text"
@@ -74,8 +77,10 @@ function SignUpForm({ onLogin }) {
             onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
+        <div id="submit-button">
           <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
-          <div>
+        </div>
+          <div id="errors">
             {errors.error}
           </div>
       </form>
