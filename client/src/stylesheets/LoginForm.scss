@@ -1,1 +1,30 @@
 @import "../utilities/variables";
+
+#login-container-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-bright;
+    border: 1rem solid $color-dark-variant;
+    color: white;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem;
+  }
+
+  input {
+    width: 100%;
+    padding: .25rem .5rem;
+    margin: .25rem;
+  }
+
+  #submit-button {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  button {
+    font-size: 16px;
+    padding: .25rem 1rem; 
+    cursor: pointer;
+  }

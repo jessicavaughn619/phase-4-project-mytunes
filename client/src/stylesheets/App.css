@@ -4,7 +4,7 @@
   background-color: #FF78A8;
   border: 1rem solid #FFEF45;
   color: white;
-  height: 15rem;
+  height: 20rem;
   align-items: center;
   justify-content: center;
   margin: 2rem;
@@ -12,13 +12,19 @@
 
 h1 {
   margin: 2rem;
+  text-align: center;
 }
 
 #links {
-  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
   text-align: center;
-  margin: 2rem;
   padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+#links :hover {
+  color: white;
 }
 
 /*# sourceMappingURL=App.css.map */
