@@ -21,6 +21,8 @@ function SignUpForm({ onLogin }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
         username,
         password,
         password_confirmation: passwordConfirmation,
@@ -40,21 +42,21 @@ function SignUpForm({ onLogin }) {
     <div id="signupform-container-wrapper">
     <h2>New to MyTunes? Sign up here!</h2>
       <form onSubmit={handleSubmit}>
-      <div id="first_name_input">
-          <label htmlFor="first_name">First Name</label>
+      <div id="firstname-input">
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            id="first_name"
+            id="firstName"
             autoComplete="off"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div id="last_name_input">
-          <label htmlFor="last_name">Last Name</label>
+        <div id="lastname-input">
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
-            id="last_name"
+            id="lastName"
             autoComplete="off"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
