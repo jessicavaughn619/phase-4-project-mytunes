@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUpForm from "./SignUpForm";
+import '../stylesheets/LoginForm.scss';
 
 function LoginForm({ onLogin }) {
     const [username, setUsername] = useState("");
@@ -25,16 +25,12 @@ function LoginForm({ onLogin }) {
         }
       });
     }
-
-    function handleClick(event) {
-      if (event.target.value === "signup") return <SignUpForm />
-    }
   
     return (
-      <div>
-      <p>Login to MyTunes</p>
+      <div id="login-container-wrapper">
+      <h2>Login to MyTunes</h2>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div id="username-input">
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -44,7 +40,7 @@ function LoginForm({ onLogin }) {
               onChange={(e) => setUsername(e.target.value)}
             />
             </div>
-            <div>
+            <div id="password-input">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -54,10 +50,12 @@ function LoginForm({ onLogin }) {
               onChange={(e) => setPassword(e.target.value)}
             />
             </div>
-            <button variant="fill" color="primary" type="submit">
-              {isLoading ? "Loading..." : "Login"}
-            </button>
-            <div>
+            <div id="submit-button">
+              <button variant="fill" color="primary" type="submit">
+                {isLoading ? "Loading..." : "Login"}
+              </button>
+            </div>
+            <div id="errors">
               {errors.error}
             </div>
         </form>

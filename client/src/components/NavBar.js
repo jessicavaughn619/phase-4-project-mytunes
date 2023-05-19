@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../stylesheets/NavBar.scss'
 
-function NavBar({ user, setUser }) {
+function NavBar({ setUser }) {
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
@@ -10,10 +11,10 @@ function NavBar({ user, setUser }) {
           });
         }
 return (
-    <>
+    <div>
     <button as={Link} to="/">Home</button>
     <button onClick={handleLogoutClick}>Logout</button>
-    </>
+    </div>
 )
 }
 

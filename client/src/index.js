@@ -1,14 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import ErrorPage from './error-page';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import SignUpForm from './components/SignUpForm';
+import LoginForm from './components/LoginForm';
+import './stylesheets/index.scss';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "signup",
+    element: <SignUpForm />,
+  },
+  {
+    path: "login",
+    element: <LoginForm />,
   },
 ]);
 
