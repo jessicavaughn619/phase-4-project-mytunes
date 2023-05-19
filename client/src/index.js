@@ -4,26 +4,13 @@ import ErrorPage from './error-page';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignUpForm from './components/SignUpForm';
-import LoginForm from './components/LoginForm';
 import './stylesheets/index.scss';
-import Footer from './components/Footer';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "signup",
-    element: <SignUpForm />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "login",
-    element: <LoginForm />,
-    errorElement: <ErrorPage />
   },
 ]);
 

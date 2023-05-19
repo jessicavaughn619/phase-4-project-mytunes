@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import NavBar from './components/NavBar';
 import LoginForm from './components/LoginForm';
-import SignUpForm from './components/SignUpForm';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import './stylesheets/App.scss';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -18,26 +17,16 @@ function App() {
     });
   }, []);
 
+  if (!user) return <>
+  <LoginForm onLogin={setUser} />
+  <SignUpForm onLogin={setUser}/>
+  </>;
+
   return (
     <>
     <div id="app-container-wrapper">
-    {user ?
-    <div id="app-container-logged-in">
-      <NavBar setUser={setUser} />
+      <NavBar user={user} setUser={setUser}/>
       <Home />
-    </div> :
-    <div id="app-container-not-logged-in">
-      <h1>Welcome to MyTunes!</h1>
-      <div id="links">
-        <div id="login-link">
-        <Link to="/login" exact Component={() => <LoginForm onLogin={setUser}/>}>Login</Link>
-        </div>
-        <div id="signup-link">
-          <Link to="/signup" exact component={() => <SignUpForm />}>Sign Up</Link>
-        </div>
-      </div>
-    </div>
-    }
     </div>
     <Footer />
     </>
