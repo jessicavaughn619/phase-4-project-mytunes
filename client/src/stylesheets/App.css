@@ -1,10 +1,8 @@
-@import "../utilities/variables";
-
 #app-container-wrapper {
   display: flex;
   flex-direction: column;
-  background-color: $color-bright;
-  border: 1rem solid $color-dark-variant;
+  background-color: #FF78A8;
+  border: 1rem solid #FFEF45;
   color: white;
   height: 15rem;
   align-items: center;
@@ -20,6 +18,7 @@ h1 {
   background-color: white;
   text-align: center;
   margin: 2rem;
-  padding: .5rem;
-
+  padding: 0.5rem;
 }
+
+/*# sourceMappingURL=App.css.map */

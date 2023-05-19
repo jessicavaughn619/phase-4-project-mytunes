@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from './components/NavBar';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
+import Footer from './components/Footer';
 import './stylesheets/App.scss';
 
 function App() {
@@ -25,10 +26,13 @@ function App() {
     </div> :
     <div id="app-container-not-logged-in">
       <h1>Welcome to MyTunes!</h1>
+      <div id="links">
       <Link to="/login" exact Component={() => <LoginForm onLogin={setUser}/>}>Login</Link>
       <Link to="/signup" exact component={() => <SignUpForm />}>Sign Up</Link>
+      </div>
     </div>
     }
+    <Footer />
     </div>
   )
 }
