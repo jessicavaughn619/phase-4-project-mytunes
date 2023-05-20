@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Playlists from "./Playlists";
 import '../stylesheets/NavBar.scss'
 
-function NavBar({ setUser }) {
+function NavBar({ setUser, users }) {
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
@@ -11,10 +12,20 @@ function NavBar({ setUser }) {
           });
         }
 return (
-    <div>
-    <button as={Link} to="/">Home</button>
-    <button onClick={handleLogoutClick}>Logout</button>
+  <div id="navbar-container-wrapper">
+    <div className="links">
+    <Link to="/">Home</Link>
+    <Link onClick={handleLogoutClick}>Logout</Link>
     </div>
+    <div className="playlists">
+      <div className="my-playlists">
+        <Playlists users={users}/>
+      </div>
+      <div className="followed-playlists">
+        Following
+      </div>
+    </div>
+   </div>
 )
 }
 

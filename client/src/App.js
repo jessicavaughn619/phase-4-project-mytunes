@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from './components/NavBar';
 import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import './stylesheets/App.scss';
 import SignUpForm from './components/SignUpForm';
+import './stylesheets/App.scss';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,8 +32,7 @@ function App() {
   return (
     <>
     <div id="app-container-wrapper">
-      <NavBar user={user} setUser={setUser}/>
-      <Home users={users}/>
+      <Home user={user} setUser={setUser} users={users}/>
     </div>
     <Footer />
     </>

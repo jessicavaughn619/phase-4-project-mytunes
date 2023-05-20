@@ -1,5 +1,7 @@
 #home-container-wrapper {
   display: flex;
+  justify-content: space-between;
+  padding: 2rem;
 }
 
 /*# sourceMappingURL=Home.css.map */

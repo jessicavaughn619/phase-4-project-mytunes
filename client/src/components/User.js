@@ -1,4 +1,5 @@
 import React from 'react';
+import "../stylesheets/User.scss";
 
 function User({ user }) {
     const { username, image_url } = user;
