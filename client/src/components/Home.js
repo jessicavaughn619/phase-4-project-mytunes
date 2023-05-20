@@ -4,11 +4,11 @@ import NavBar from "./NavBar";
 import "../stylesheets/Home.scss";
 import MusicList from "./MusicList";
 
-function Home({ users, artists }) {
+function Home({ users, artists, playlists }) {
     return (
         <div id="home-container-wrapper">
             <div id="nav-container-wrapper">
-                <NavBar users={users}/>
+                <NavBar users={users} playlists={playlists}/>
             </div>
             <div id="music-container-wrapper">
                 <MusicList artists={artists}/>
