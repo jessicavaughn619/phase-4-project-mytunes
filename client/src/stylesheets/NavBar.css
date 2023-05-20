@@ -1,5 +1,8 @@
 #navbar-container-wrapper {
   background-color: #FF78A8;
+  overflow: hidden;
+  height: 100vh;
+  width: 25vh;
 }
 
 .links {

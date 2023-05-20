@@ -2,4 +2,7 @@
 
 #userlist-container-wrapper {
     background-color: $color-dark;
+    overflow: hidden;
+    height: 100vh;
+    width: 25vh;
 }

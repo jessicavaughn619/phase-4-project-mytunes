@@ -1,5 +1,8 @@
 #musiclist-container-wrapper {
   background-color: #3098B3;
+  overflow: hidden;
+  height: 100vh;
+  width: 50vh;
 }
 
 /*# sourceMappingURL=MusicList.css.map */

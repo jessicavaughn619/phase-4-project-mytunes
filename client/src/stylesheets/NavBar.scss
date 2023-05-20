@@ -2,6 +2,9 @@
 
 #navbar-container-wrapper {
     background-color: $color-bright;
+    overflow: hidden;
+    height: 100vh;
+    width: 25vh;
 }
 
 .links {

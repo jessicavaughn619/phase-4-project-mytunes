@@ -2,4 +2,7 @@
 
 #musiclist-container-wrapper {
     background-color: $color-primary;
+    overflow: hidden;
+    height: 100vh;
+    width: 50vh;
 }

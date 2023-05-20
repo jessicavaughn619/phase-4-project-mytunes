@@ -1,5 +1,8 @@
 #userlist-container-wrapper {
   background-color: #B3A839;
+  overflow: hidden;
+  height: 100vh;
+  width: 25vh;
 }
 
 /*# sourceMappingURL=UserList.css.map */
