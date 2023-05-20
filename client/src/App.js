@@ -9,9 +9,11 @@ function App() {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [showSignup, setShowSignup] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
 
   function handleClick() {
-    setShowSignup(showSignUp => !showSignUp)
+    setShowSignup(showSignUp => !showSignUp);
+    setShowLogin(showLogin => !showLogin);
   }
 
   useEffect(() => {
@@ -33,10 +35,10 @@ function App() {
     {user ? 
       <Home user={user} setUser={setUser} users={users}/> :
       <>
-      <LoginForm onLogin={setUser} />
+      {showLogin ? <LoginForm onLogin={setUser} /> : null }
       <div id="signup-button-container">
-        <h2>New to MyTunes?</h2>
-        <button onClick={handleClick}>{showSignup ? "Close Sign Up Form" : "Sign Up"}</button>
+        <h2>{showSignup ? "Returning User?" : "New to MyTunes?"}</h2>
+        <button onClick={handleClick}>{showSignup ? "Login" : "Sign Up"}</button>
       </div>
       {showSignup ? 
       <SignUpForm onLogin={setUser}/> : null}
