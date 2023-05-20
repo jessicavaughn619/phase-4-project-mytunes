@@ -8,6 +8,7 @@ import './stylesheets/App.scss';
 function App() {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [artists, setArtists] =  useState([]);
   const [showSignup, setShowSignup] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
 
@@ -30,10 +31,16 @@ function App() {
     .then(users => setUsers(users))
   }, [])
 
+  useEffect(() => {
+    fetch("/artists")
+    .then(res => res.json())
+    .then(artists => setArtists(artists))
+  }, [])
+
   return (
     <div id="app-container-wrapper">
     {user ? 
-      <Home user={user} setUser={setUser} users={users}/> :
+      <Home user={user} setUser={setUser} users={users} artists={artists}/> :
       <>
       {showLogin ? <LoginForm onLogin={setUser} /> : null }
       <div id="signup-button-container">
