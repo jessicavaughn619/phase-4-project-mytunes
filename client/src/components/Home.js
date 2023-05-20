@@ -4,17 +4,21 @@ import NavBar from "./NavBar";
 import "../stylesheets/Home.scss";
 import MusicList from "./MusicList";
 
-function Home({ users, artists, playlists }) {
+function Home({ user, users, artists, playlists }) {
     return (
         <div id="home-container-wrapper">
             <div id="nav-container-wrapper">
-                <NavBar users={users} playlists={playlists}/>
+                <NavBar 
+                user={user}
+                playlists={playlists}/>
             </div>
             <div id="music-container-wrapper">
-                <MusicList artists={artists}/>
+                <MusicList 
+                artists={artists}/>
             </div>
             <div id="user-container-wrapper">
-                <UserList users={users}/>
+                <UserList 
+                users={users}/>
             </div>
         </div>
     )
