@@ -9,6 +9,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [artists, setArtists] =  useState([]);
+  const [playlists, setPlaylists] = useState([]);
   const [showSignup, setShowSignup] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
 
@@ -37,10 +38,16 @@ function App() {
     .then(artists => setArtists(artists))
   }, [])
 
+  useEffect(() => {
+    fetch("/playlists")
+    .then(res => res.json())
+    .then(playlists => setPlaylists(playlists))
+  }, [])
+
   return (
     <div id="app-container-wrapper">
     {user ? 
-      <Home user={user} setUser={setUser} users={users} artists={artists}/> :
+      <Home user={user} setUser={setUser} users={users} artists={artists} playlists={playlists}/> :
       <>
       {showLogin ? <LoginForm onLogin={setUser} /> : null }
       <div id="signup-button-container">

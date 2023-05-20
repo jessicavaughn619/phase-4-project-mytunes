@@ -43,6 +43,30 @@ with app.app_context():
         )
         songs.append(song)
     db.session.add_all(songs)
-    db.session.commit()
 
+    print('Creating new playlists...')
+    playlists = []
+    for n in range(10):
+        playlist = Playlist(
+            name=fake.first_name(),
+        )
+        playlists.append(playlist)
+    db.session.add_all(playlists)
+    
+    db.session.commit()
+    
+    # print('Relating records...')
+    # def relate_records(users, artists, songs, playlists):
+    #     for user in users:
+    #         user.playlists = rc(playlists)
+    #     for artist in artists:
+    #         artist.songs = rc(songs)
+    #     for song in songs:
+    #         song.artist_id = rc(artists.id)
+    #     for playlist in playlists:
+    #         playlist.user_id = rc(users.id)
+    #     db.session.add_all(users, artists, songs, playlists)
+    # relate_records(users, artists, songs, playlists)
+
+    # db.session.commit()
     print('Complete!')

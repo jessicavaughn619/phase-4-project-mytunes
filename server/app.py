@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db
-from models import User, Artist
+from models import User, Artist, Playlist
 
 api = Api(app)
 
@@ -20,6 +20,11 @@ class Artists(Resource):
     def get(self):
         artists = [artist.to_dict() for artist in Artist.query.all()]
         return make_response(jsonify(artists), 200)
+    
+class Playlists(Resource):
+    def get(self):
+        playlists = [playlist.to_dict() for playlist in Playlist.query.all()]
+        return make_response(jsonify(playlists), 200)
 
 class Signup(Resource):
     def post(self):
@@ -90,6 +95,7 @@ class Logout(Resource):
 
 api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Artists, '/artists', endpoint='artists')
+api.add_resource(Playlists, '/playlists', endpoint='playlists')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')

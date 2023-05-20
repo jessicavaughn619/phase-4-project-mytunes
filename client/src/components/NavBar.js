@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Playlists from "./Playlists";
 import '../stylesheets/NavBar.scss'
 
-function NavBar({ setUser, users }) {
+function NavBar({ setUser, users, playlists }) {
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
@@ -18,12 +18,7 @@ return (
     <Link onClick={handleLogoutClick}>Logout</Link>
     </div>
     <div className="playlists">
-      <div className="my-playlists">
-        <Playlists users={users}/>
-      </div>
-      <div className="followed-playlists">
-        Following
-      </div>
+        <Playlists users={users} playlists={playlists}/>
     </div>
    </div>
 )
