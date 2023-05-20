@@ -1,5 +1,6 @@
 import React from "react";
 import User from "./User";
+import "../stylesheets/UserList.scss";
 
 function UserList({ users }) {
 
@@ -9,7 +10,7 @@ function UserList({ users }) {
             user={user}
         /> ))
     return (
-        <div>
+        <div id="userlist-container-wrapper">
         <h2>Users</h2>
             {allUsers}
         </div>

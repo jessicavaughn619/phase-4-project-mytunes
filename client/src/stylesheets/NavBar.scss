@@ -1,1 +1,11 @@
 @import "../utilities/variables";
+
+#navbar-container-wrapper {
+    background-color: $color-bright;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
