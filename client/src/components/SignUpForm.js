@@ -40,7 +40,7 @@ function SignUpForm({ onLogin }) {
 
   return (
     <div id="signupform-container-wrapper">
-    <h2>New to MyTunes? Sign up here!</h2>
+    <h2>Register for MyTunes</h2>
       <form onSubmit={handleSubmit}>
       <div id="firstname-input">
           <label htmlFor="firstName">First Name</label>

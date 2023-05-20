@@ -1,3 +1,9 @@
+#signup-button-container {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #FF78A8;
+}
+
 h1 {
   margin: 2rem;
   text-align: center;
