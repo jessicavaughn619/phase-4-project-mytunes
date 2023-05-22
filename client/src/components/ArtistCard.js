@@ -1,6 +1,7 @@
 import React from 'react';
+import '../stylesheets/ArtistCard.scss';
 
-const Artist = ({artist}) => {
+const ArtistCard = ({artist}) => {
     const { name, songs } = artist;
 
   return (
@@ -15,4 +16,4 @@ const Artist = ({artist}) => {
   )
 }
 
-export default Artist;
+export default ArtistCard;

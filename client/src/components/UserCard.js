@@ -1,7 +1,7 @@
 import React from 'react';
-import "../stylesheets/User.scss";
+import "../stylesheets/UserCard.scss";
 
-function User({ user }) {
+function UserCard({ user }) {
     const { username, image_url } = user;
 
   return (
@@ -16,4 +16,4 @@ function User({ user }) {
   )
 }
 
-export default User;
+export default UserCard;

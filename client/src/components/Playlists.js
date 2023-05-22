@@ -1,9 +1,10 @@
 import React from 'react';
-import Playlist from './Playlist';
+import PlaylistCard from './PlaylistCard';
+import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ user, playlists }) => {
     const allPlaylists = playlists.map((playlist) => (
-        <Playlist 
+        <PlaylistCard 
         key={playlist.id}
         playlist={playlist}/>
     ))

@@ -2,5 +2,10 @@
 
 #home-container-wrapper {
     display: flex;
+    flex-direction: column;
+}
+
+#content-container-wrapper {
+    display: flex;
     justify-content: space-between;
 }
