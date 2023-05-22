@@ -1,1 +1,9 @@
 @import "../utilities/variables";
+
+#playlists-container-wrapper {
+    background-color: $color-primary-light;
+    overflow: hidden;
+    height: 80vh;
+    width: 10vh;
+    margin: 2rem;
+}
