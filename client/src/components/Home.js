@@ -2,15 +2,15 @@ import React from "react";
 import UserList from "./UserList";
 import NavBar from "./NavBar";
 import Playlists from "./Playlists";
-import "../stylesheets/Home.scss";
 import MusicList from "./MusicList";
+import "../stylesheets/Home.scss";
 
-function Home({ user, users, setUser, artists, playlists }) {
+function Home({ user, users, onSetUser, artists, playlists }) {
     return (
         <div id="home-container-wrapper">
             <div id="nav-container-wrapper">
                 <NavBar 
-                user={user} onSetUser={setUser}/>
+                user={user} onSetUser={onSetUser}/>
             </div>
             <div id="content-container-wrapper">
                 <div id="playlist-container-wrapper">
