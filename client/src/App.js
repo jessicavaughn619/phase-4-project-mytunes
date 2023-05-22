@@ -3,6 +3,7 @@ import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import SignUpForm from './components/SignUpForm';
+import { Routes, Route, Link } from "react-router-dom";
 import './stylesheets/App.scss';
 
 function App() {
@@ -10,13 +11,6 @@ function App() {
   const [users, setUsers] = useState([]);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
-  const [showSignup, setShowSignup] = useState(false);
-  const [showLogin, setShowLogin] = useState(true);
-
-  function handleClick() {
-    setShowSignup(showSignUp => !showSignUp);
-    setShowLogin(showLogin => !showLogin);
-  }
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -47,15 +41,27 @@ function App() {
   return (
     <div id="app-container-wrapper">
     {user ? 
-      <Home user={user} setUser={setUser} users={users} artists={artists} playlists={playlists}/> :
+    <Routes>
+      <Route exact path='/' element={<Home
+        user={user} 
+        onSetUser={setUser} 
+        users={users} 
+        artists={artists} 
+        playlists={playlists}/>}>
+      </Route>
+    </Routes>
+      :
       <>
-      {showLogin ? <LoginForm onLogin={setUser} /> : null }
-      <div id="signup-button-container">
-        <h2>{showSignup ? "Returning User?" : "New to MyTunes?"}</h2>
-        <button onClick={handleClick}>{showSignup ? "Login" : "Sign Up"}</button>
+      <div className="links">
+        <Link to='/signup'>Sign Up</Link>
+        <Link to='/login'>Login</Link>
       </div>
-      {showSignup ? 
-      <SignUpForm onLogin={setUser}/> : null}
+      <Routes>
+        <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}>
+        </Route>
+        <Route path='/login' element={<LoginForm onLogin={setUser}/>}>
+        </Route>
+      </Routes>
       </>
     }
     <Footer />
