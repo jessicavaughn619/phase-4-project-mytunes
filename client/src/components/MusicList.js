@@ -1,11 +1,11 @@
 import React from 'react';
-import Artist from './Artist';
+import ArtistCard from './ArtistCard';
 import "../stylesheets/MusicList.scss";
 
 const MusicList = ({ artists }) => {
 
   const allArtists = artists.map((artist) => (
-    <Artist
+    <ArtistCard
         key={artist.id}
         artist={artist}
     /> ))

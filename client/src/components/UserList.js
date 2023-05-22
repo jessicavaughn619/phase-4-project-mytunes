@@ -1,11 +1,11 @@
 import React from "react";
-import User from "./User";
+import UserCard from "./UserCard";
 import "../stylesheets/UserList.scss";
 
 function UserList({ users }) {
 
     const allUsers = users.map((user) => (
-        <User 
+        <UserCard 
             key={user.id}
             user={user}
         /> ))
