@@ -5,12 +5,12 @@ import Playlists from "./Playlists";
 import "../stylesheets/Home.scss";
 import MusicList from "./MusicList";
 
-function Home({ user, users, artists, playlists }) {
+function Home({ user, users, setUser, artists, playlists }) {
     return (
         <div id="home-container-wrapper">
             <div id="nav-container-wrapper">
                 <NavBar 
-                user={user}/>
+                user={user} onSetUser={setUser}/>
             </div>
             <div id="content-container-wrapper">
                 <div id="playlist-container-wrapper">
