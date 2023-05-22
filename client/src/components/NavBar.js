@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import '../stylesheets/NavBar.scss'
 
-function NavBar({ setUser }) {
+function NavBar({ onSetUser }) {
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
-              setUser(null);
+              onSetUser(null);
             }
           });
         }
