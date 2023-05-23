@@ -30,6 +30,7 @@ bcrypt = "*"
 flask-bcrypt = "*"
 python-dotenv = "*"
 honcho = "*"
+ipdb = "*"
 
 [dev-packages]
 
