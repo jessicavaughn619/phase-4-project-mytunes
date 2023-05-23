@@ -1,0 +1,21 @@
+@import "../utilities/variables";
+
+#song-card {
+    display: flex;
+    flex-direction: column;
+    height: 15rem;
+    align-items: center;
+}
+
+.name {
+    font-size: 16px;
+}
+
+.image {
+    height: 100px;
+    width: 100px;
+}
+
+.artist {
+    font-size: 16px;
+}

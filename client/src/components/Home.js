@@ -5,7 +5,7 @@ import Playlists from "./Playlists";
 import MusicList from "./MusicList";
 import "../stylesheets/Home.scss";
 
-function Home({ user, users, onSetUser, artists, playlists }) {
+function Home({ user, users, onSetUser, artists, playlists, songs }) {
     return (
         <div id="home-container-wrapper">
             <div id="nav-container-wrapper">
@@ -20,7 +20,8 @@ function Home({ user, users, onSetUser, artists, playlists }) {
                 </div>
                 <div id="music-container-wrapper">
                     <MusicList 
-                    artists={artists}/>
+                    artists={artists}
+                    songs={songs}/>
                 </div>
                 <div id="user-container-wrapper">
                     <UserList 

@@ -11,6 +11,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
+  const [songs, setSongs] = useState([]);
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -38,6 +39,12 @@ function App() {
     .then(playlists => setPlaylists(playlists))
   }, [])
 
+  useEffect(() => {
+    fetch("/songs")
+    .then(res => res.json())
+    .then(songs => setSongs(songs))
+  }, [])
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -47,7 +54,8 @@ function App() {
         onSetUser={setUser} 
         users={users} 
         artists={artists} 
-        playlists={playlists}/>}>
+        playlists={playlists}
+        songs={songs}/>}>
       </Route>
     </Routes>
       :

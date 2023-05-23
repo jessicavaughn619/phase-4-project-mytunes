@@ -56,12 +56,14 @@ class Song(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    genre = db.Column(db.String, nullable=False)
+    artist_name = db.Column(db.String, nullable=False)
+    album = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String, nullable=False)
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'))
 
     def __repr__(self):
-        return f'<Song ID: {self.id} | Name: {self.name} | Genre: {self.genre}>'
+        return f'<Song ID: {self.id} | Name: {self.name} | Artist: {self.artist} | Album: {self.album}>'
     
 class Playlist(db.Model, SerializerMixin):
     __tablename__ = "playlists"
