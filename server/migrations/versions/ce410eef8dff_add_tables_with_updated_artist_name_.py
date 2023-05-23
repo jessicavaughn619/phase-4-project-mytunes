@@ -1,8 +1,8 @@
-"""Add tables
+"""Add tables with updated artist name category for songs
 
-Revision ID: 8ccf898b721d
+Revision ID: ce410eef8dff
 Revises: 
-Create Date: 2023-05-19 13:17:50.772937
+Create Date: 2023-05-23 12:23:04.532872
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8ccf898b721d'
+revision = 'ce410eef8dff'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,7 +43,9 @@ def upgrade():
     op.create_table('songs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('genre', sa.String(), nullable=False),
+    sa.Column('artist_name', sa.String(), nullable=False),
+    sa.Column('album', sa.String(), nullable=False),
+    sa.Column('image_url', sa.String(), nullable=False),
     sa.Column('artist_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ),
     sa.PrimaryKeyConstraint('id')
