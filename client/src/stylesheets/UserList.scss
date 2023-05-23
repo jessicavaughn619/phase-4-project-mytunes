@@ -4,29 +4,29 @@
     background-color: $color-dark;
     overflow: hidden;
     height: 70vh;
-    width: 25vh;
     margin: 2rem;
-}
 
-.swiper {
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: white;
+
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+    display: block;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    }
 }
 
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: white;
-
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
