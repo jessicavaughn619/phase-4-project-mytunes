@@ -1,8 +1,8 @@
-"""Add tables with updated artist name category for songs
+"""Add tables
 
-Revision ID: ce410eef8dff
+Revision ID: a376bf77a778
 Revises: 
-Create Date: 2023-05-23 12:23:04.532872
+Create Date: 2023-05-23 15:12:20.617269
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ce410eef8dff'
+revision = 'a376bf77a778'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,9 @@ def upgrade():
     op.create_table('artists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('spotify_id', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('spotify_id')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -46,8 +48,8 @@ def upgrade():
     sa.Column('artist_name', sa.String(), nullable=False),
     sa.Column('album', sa.String(), nullable=False),
     sa.Column('image_url', sa.String(), nullable=False),
-    sa.Column('artist_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ),
+    sa.Column('artist_id', sa.String(), nullable=True),
+    sa.ForeignKeyConstraint(['artist_id'], ['artists.spotify_id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('playlist_songs',

@@ -45,11 +45,12 @@ class Artist(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    spotify_id = db.Column(db.String, nullable=False, unique=True)
 
     songs = db.relationship('Song', backref='artist')
 
     def __repr__(self):
-        return f'<Artist ID: {self.id} | Name: {self.name}>'
+        return f'<Artist ID: {self.id} | Name: {self.name} | Spotify ID: {self.spotify_id}>'
     
 class Song(db.Model, SerializerMixin):
     __tablename__ = "songs"
@@ -60,10 +61,10 @@ class Song(db.Model, SerializerMixin):
     album = db.Column(db.String, nullable=False)
     image_url = db.Column(db.String, nullable=False)
 
-    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'))
+    artist_id = db.Column(db.String, db.ForeignKey('artists.spotify_id'))
 
     def __repr__(self):
-        return f'<Song ID: {self.id} | Name: {self.name} | Artist: {self.artist} | Album: {self.album}>'
+        return f'<Song ID: {self.id} | Name: {self.name} | Artist: {self.artist} | Album: {self.album} Spotify ID: {self.spotify_id}>'
     
 class Playlist(db.Model, SerializerMixin):
     __tablename__ = "playlists"
