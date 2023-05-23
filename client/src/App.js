@@ -52,10 +52,13 @@ function App() {
     </Routes>
       :
       <>
-      <div className="links">
-        <Link to='/signup'>Sign Up</Link>
-        <Link to='/login'>Login</Link>
-      </div>
+      <div className="no-session-landing">
+        <h1>Welcome to MyTunes!</h1>
+        <div className="links">
+        <Link to='/signup' className="link">Sign Up</Link>
+        <Link to='/login' className="link">Login</Link>
+        </div>
+        </div>
       <Routes>
         <Route path='/signup' element={<SignUpForm onLogin={setUser}/>}>
         </Route>
