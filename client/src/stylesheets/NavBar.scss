@@ -2,12 +2,9 @@
 
 #navbar-container-wrapper {
     background-color: $color-bright;
-    width: 100vh;
-    overflow: hidden;
 }
 
 .links {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
 }

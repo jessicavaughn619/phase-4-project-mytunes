@@ -20,7 +20,26 @@ const MusicList = ({ artists }) => {
     <div id="musiclist-container-wrapper">
         <h2>Artists</h2>
         <Swiper
-        direction={"vertical"}
+        modules={[Scrollbar, FreeMode, Mousewheel]}
+        spaceBetween={20}
+        slidesPerView={5}
+        freeMode={true}
+        mousewheel={true}
+        scrollbar={{draggable: true }}>
+            {allArtists}
+        </Swiper>
+        <h2>Genres</h2>
+        <Swiper
+        modules={[Scrollbar, FreeMode, Mousewheel]}
+        spaceBetween={20}
+        slidesPerView={5}
+        freeMode={true}
+        mousewheel={true}
+        scrollbar={{draggable: true }}>
+            {allArtists}
+        </Swiper>
+        <h2>Songs</h2>
+        <Swiper
         modules={[Scrollbar, FreeMode, Mousewheel]}
         spaceBetween={20}
         slidesPerView={5}

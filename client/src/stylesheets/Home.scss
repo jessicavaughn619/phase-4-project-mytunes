@@ -6,6 +6,7 @@
 }
 
 #content-container-wrapper {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 15rem auto 25rem;
+    justify-content: space-evenly;
 }
