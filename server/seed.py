@@ -14,98 +14,68 @@ with app.app_context():
     Artist.query.delete()
     Playlist.query.delete()
 
-    def retrieve_tracks_and_artists():
-        access_token = "BQB9Rh47C4IoNfFvEfjcLvNw1WUClSe9kQdWGkNUSubU8yaAvDIRCECJz84oJFBggZ1UnZK8ETYVtPO2JBeR-WpgZlVU-O4qhN1mFmzY1Idftq_N-uc"
-        playlist_id = '37i9dQZF1DXadOVCgGhS7j'
+    # Get artist ids from single playlist
+    url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
+    headers = {
+        "Authorization": "Bearer BQD_HYvfKaxH8veNdGqKNDz55bo92Xa8zufc_9EAdoL-i5RVwbpzEuLJTaLY8F1BSbW8strlO8aYp7pmLfAO1a4e7qzhQfPPZoYyUcXBgGHwNupWtFg"
+    }
+    response = requests.get(url, headers=headers)
+    data = response.json()
 
-        headers = {
-            "Authorization": f'Bearer {access_token}'
-        }
+    # Extract artist Spotify IDs
+    artist_ids = {track['track']['artists'][0]['id'] for track in data['items']}
 
-        api_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+    def get_artist_data():
+        artists = []
 
-        response = requests.get(api_url, headers=headers)
-        data = response.json()
-
-        tracks = []
-
-        print("Creating new artist instances...")
-        for item in data["items"]:
-            track_info = item["track"]
-            artists=[]
-            for artist_info in track_info["artists"]:
-                if len(artists) == 1:
-                        artist = Artist(
-                            name=artist_info["name"],
-                            spotify_id=artist_info["id"]
-                        )
-                        artists.append(artist)
-                else:
-                    spotify_id = artist_info["id"]
-                    existing_spotify_ids = [a[spotify_id] for a in artists]
-                    if spotify_id not in existing_spotify_ids:
-                        artist = Artist(
-                            name=artist_info["name"],
-                            spotify_id=artist_info["id"]
-                        )
-                        artists.append(artist)
-            db.session.add_all(artists)
-        
-        print("Creating new song instances...")
-        if "items" in data and len(data["items"]) > 0:
-            for item in data["items"]:
-                track_info = item["track"]
-                track = Song(
-                    name=track_info["name"],
-                    artist_name=artists,
-                    album=track_info["album"]["name"], 
-                    image_url=track_info["album"]["images"][0]["url"]
-                )
-                tracks.append(track)  
-        db.session.add_all(tracks)
-
-    
-    # def retrieve_artists():
-    #     access_token = "BQDBLMXmaiWm0MsQkBBMmL76IjNH4HspSbPbbL6zOwawKvig-Ic06TqCyLNev3dxsUjOIdXfT4x5le8p3crzREW8D9O0MRqTG3J1WhHjEBSVr5PnRMA"
-    #     for track in tracks:
-    #         artist_ids = []
-    #         artist_id = track.spotify_id
-
-        
-    #     artist_ids = 
-
-    #     headers = {
-    #         "Authorization": f'Bearer {access_token}'
-    #     }
-
-    #     api_url = f'https://api.spotify.com/v1/artists/{artist_ids}'
-
-    #     response = requests.get(api_url, headers=headers)
-    #     data = response.json()
-        
-    #     print("Creating new artist instances...")
-    #     for item in data["items"]:
-    #         track_info = item["track"]
-    #         for artist_info in track_info["artists"]:
-    #                 if artist_info["id"] not in artists:
-    #                     artist = Artist(
-    #                         name=artist_info["name"],
-    #                         spotify_id=artist_info["id"]
-    #                     )
-    #                     artists.append(artist)
-    #         db.session.add_all(artists)
-
-    print('Creating new users...')
-    users = []
-    for n in range(10):
-        user = User(
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            username=fake.user_name(),
-            image_url=fake.image_url(100, 100)
+        print("Creating artist instances...")
+        for artist_id in list(artist_ids):
+            url = f"https://api.spotify.com/v1/artists/{artist_id}"
+            response = requests.get(url, headers=headers)
+            data = response.json()
+            artist = Artist(
+                name=data['name'],
+                spotify_id=artist_id,
+                image_url=data['images'][0]['url'] if data['images'] else None,
+                genres=data['genres']
             )
-        users.append(user)
-    db.session.add_all(users)
+            artists.append(artist)
+        db.session.add_all(artists)
+        db.session.commit()
+
+
+    def create_song_instances():
+        print("Creating song instances...")
+        for artist_id in list(artist_ids):
+            url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks?market=US"
+            response = requests.get(url, headers=headers)
+            data = response.json()
+            artist_name = data['tracks'][0]['artists'][0]['name']
+            songs = []
+            for track in data['tracks']:
+                song = Song(
+                    name=track['name'],
+                    album=track['album']['name'],
+                    artist_name=artist_name,
+                    image_url=track["album"]["images"][0]["url"],
+                    artist_id=artist_id
+                )
+                songs.append(song)
+            db.session.add_all(songs)
+        db.session.commit()
+
+    def create_users():
+        print('Creating new users...')
+        users = []
+        for n in range(10):
+            user = User(
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+                username=fake.user_name(),
+                image_url=fake.image_url(100, 100)
+                )
+            users.append(user)
+        db.session.add_all(users)
 
     # print('Creating new playlists...')
     # names = ["Jams", "Favorite Tunes", "Great Songs", "My Faves"]
@@ -116,7 +86,10 @@ with app.app_context():
     #     )
     #     playlists.append(playlist)
     # db.session.add_all(playlists)
-    retrieve_tracks_and_artists()
+
+    get_artist_data()
+    create_song_instances()
+    create_users()
     db.session.commit()
     
     # print('Relating records...')
