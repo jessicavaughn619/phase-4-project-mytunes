@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db
-from models import User, Artist, Playlist, Song
+from models import User, Artist, Playlist
 
 api = Api(app)
 
@@ -16,20 +16,16 @@ class Users(Resource):
         users = [user.to_dict() for user in User.query.all()]
         return make_response(jsonify(users), 200)
     
-class Artists(Resource):
+class Music(Resource):
     def get(self):
-        artists = [artist.to_dict() for artist in Artist.query.all()]
-        return make_response(jsonify(artists), 200)
+        music = [artist.to_dict() for artist in Artist.query.all()]
+        return make_response(jsonify(music), 200)
     
 class Playlists(Resource):
     def get(self):
         playlists = [playlist.to_dict() for playlist in Playlist.query.all()]
         return make_response(jsonify(playlists), 200)
     
-class Songs(Resource):
-    def get(self):
-        songs = [song.to_dict() for song in Song.query.all()]
-        return make_response(jsonify(songs), 200)
 
 class Signup(Resource):
     def post(self):
@@ -99,9 +95,8 @@ class Logout(Resource):
 
 
 api.add_resource(Users, '/users', endpoint='users')
-api.add_resource(Artists, '/artists', endpoint='artists')
+api.add_resource(Music, '/music', endpoint='music')
 api.add_resource(Playlists, '/playlists', endpoint='playlists')
-api.add_resource(Songs, '/songs', endpoint='songs')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')

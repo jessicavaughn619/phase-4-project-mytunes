@@ -27,7 +27,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    fetch("/artists")
+    fetch("/music")
     .then(res => res.json())
     .then(artists => setArtists(artists))
   }, [])

@@ -8,7 +8,6 @@ import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 
 const MusicList = ({ artists }) => {
-
   const allArtists = artists.map((artist) => (
     <SwiperSlide>
       <ArtistCard
@@ -16,6 +15,16 @@ const MusicList = ({ artists }) => {
           artist={artist}
       />
     </SwiperSlide>))
+
+const allSongs = artists.map((artist) => (
+  (artist.songs).map((song) => (
+    <SwiperSlide>
+      <SongCard
+          key={song.id}
+          song={song}
+      />
+  </SwiperSlide>
+  ))))
 
   return (
     <div id="musiclist-container-wrapper">
@@ -47,7 +56,7 @@ const MusicList = ({ artists }) => {
         freeMode={true}
         mousewheel={true}
         scrollbar={{draggable: true }}>
-            Songs go here!
+            {allSongs}
         </Swiper>
     </div>
   )
