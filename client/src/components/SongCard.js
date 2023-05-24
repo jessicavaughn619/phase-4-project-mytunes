@@ -3,6 +3,7 @@ import '../stylesheets/SongCard.scss'
 
 const SongCard = ({song}) => {
     const { name, artist_name, image_url } = song;
+    
     return (
     <div id="song-card">
         <div className="image">
