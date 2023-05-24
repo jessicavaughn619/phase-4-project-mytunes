@@ -1,8 +1,8 @@
-"""Add tables
+"""Add genres to artist model
 
-Revision ID: a376bf77a778
+Revision ID: 27165f3f0503
 Revises: 
-Create Date: 2023-05-23 15:12:20.617269
+Create Date: 2023-05-24 11:50:24.535980
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a376bf77a778'
+revision = '27165f3f0503'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('spotify_id', sa.String(), nullable=False),
+    sa.Column('image_url', sa.String(), nullable=True),
+    sa.Column('genres', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('spotify_id')
     )

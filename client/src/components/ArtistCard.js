@@ -2,15 +2,15 @@ import React from 'react';
 import '../stylesheets/ArtistCard.scss';
 
 const ArtistCard = ({artist}) => {
-  const { name, songs } = artist;
+  const { name, image_url } = artist;
 
   return (
     <div id="artist-card">
         <div className="name">
             {name}
         </div>
-        <div className="songs">
-            {songs}
+        <div className="image">
+          <img src={image_url} alt={name}/>
         </div>
     </div>
   )
