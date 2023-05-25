@@ -1,6 +1,7 @@
 import React from 'react';
 import ArtistCard from './ArtistCard';
 import SongCard from './SongCard';
+import GenreCard from './GenreCard';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, FreeMode, Mousewheel } from 'swiper';
 import "../stylesheets/MusicList.scss";
@@ -8,6 +9,12 @@ import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 
 const MusicList = ({ artists }) => {
+
+  const genres = [];
+  artists.map((artist) => (genres.push(artist.genres)));
+  const uniqueGenres = [...new Set(genres)];
+  const filteredUniqueGenres = uniqueGenres.filter(genre => genre !== null);
+
   const allArtists = artists.map((artist) => (
     <SwiperSlide>
       <ArtistCard
@@ -15,6 +22,14 @@ const MusicList = ({ artists }) => {
           artist={artist}
       />
     </SwiperSlide>))
+
+const allUniqueGenres = filteredUniqueGenres.map((genre) => (
+  <SwiperSlide>
+    <GenreCard
+        key={genre}
+        genre={genre}
+    />
+  </SwiperSlide>))
 
 const allSongs = artists.map((artist) => (
   (artist.songs).map((song) => (
@@ -46,7 +61,7 @@ const allSongs = artists.map((artist) => (
         freeMode={true}
         mousewheel={true}
         scrollbar={{draggable: true }}>
-            Genres go here!
+            {allUniqueGenres}
         </Swiper>
         <h2>Songs</h2>
         <Swiper

@@ -47,7 +47,7 @@ class Artist(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
     spotify_id = db.Column(db.String, nullable=False, unique=True)
     image_url = db.Column(db.String)
-    genres = db.Column(db.String, nullable=False)
+    genres = db.Column(db.String)
 
     songs = db.relationship('Song', backref='artist')
 

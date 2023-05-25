@@ -17,7 +17,7 @@ with app.app_context():
     # Get artist ids from single playlist
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": "Bearer BQD_HYvfKaxH8veNdGqKNDz55bo92Xa8zufc_9EAdoL-i5RVwbpzEuLJTaLY8F1BSbW8strlO8aYp7pmLfAO1a4e7qzhQfPPZoYyUcXBgGHwNupWtFg"
+        "Authorization": "Bearer BQBJp7NsXASL1c9HSBszbT9c9RobaN-5BeiqUXZX8Gx21iC5gEjRDpHQL4PHtWed-3oI-sdVN5t7xpRaO1SPE87hvuQE069boz6cprCJ_gxpWAHaupw"
     }
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -37,7 +37,7 @@ with app.app_context():
                 name=data['name'],
                 spotify_id=artist_id,
                 image_url=data['images'][0]['url'] if data['images'] else None,
-                genres=data['genres']
+                genres=(data['genres'][0]).title() if data['genres'] else None
             )
             artists.append(artist)
         db.session.add_all(artists)

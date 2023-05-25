@@ -6,11 +6,11 @@ const ArtistCard = ({artist}) => {
 
   return (
     <div id="artist-card">
-        <div className="name">
-            {name}
-        </div>
         <div className="image">
           <img src={image_url} alt={name}/>
+        </div>
+        <div className="name">
+            {name}
         </div>
     </div>
   )
