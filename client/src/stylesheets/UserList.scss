@@ -1,9 +1,9 @@
 @import "../utilities/variables";
 
 #userlist-container-wrapper {
-    background-color: $color-dark;
+    background-color: $color-primary-light;
     overflow: hidden;
-    height: 70vh;
+    height: 100vh;
     margin: 2rem;
 
     .swiper {
@@ -14,7 +14,7 @@
     .swiper-slide {
         text-align: center;
         font-size: 18px;
-        background: white;
+        background: $color-primary-light;
 
         /* Center slide text vertically */
         display: flex;
