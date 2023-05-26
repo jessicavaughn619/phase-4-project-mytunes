@@ -1,11 +1,15 @@
 import React from 'react';
 import '../stylesheets/ArtistCard.scss';
 
-const ArtistCard = ({artist}) => {
-  const { name, image_url } = artist;
+const ArtistCard = ({ artist, onSetArtist }) => {
+  const { name, image_url, id } = artist;
+
+  function handleClick() {
+    onSetArtist(id)
+  }
 
   return (
-    <div id="artist-card">
+    <div onClick={handleClick} className="artist-card">
         <div className="image">
           <img src={image_url} alt={name}/>
         </div>

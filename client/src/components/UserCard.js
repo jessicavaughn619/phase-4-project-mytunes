@@ -6,10 +6,10 @@ function UserCard({ user }) {
 
   return (
     <div id="user-card">
-        <div className="username">
+        <div className="name">
             {username}
         </div>
-        <div classname="image">
+        <div className="image">
             <img src={image_url} alt={username}/>
         </div>
     </div>
