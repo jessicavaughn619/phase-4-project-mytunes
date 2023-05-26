@@ -1,3 +1,4 @@
+import os
 from faker import Faker
 from config import db, app
 import requests
@@ -17,7 +18,7 @@ with app.app_context():
     # Get artist ids from single playlist
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": "Bearer BQBJp7NsXASL1c9HSBszbT9c9RobaN-5BeiqUXZX8Gx21iC5gEjRDpHQL4PHtWed-3oI-sdVN5t7xpRaO1SPE87hvuQE069boz6cprCJ_gxpWAHaupw"
+        os.environ.get('AUTH')
     }
     response = requests.get(url, headers=headers)
     data = response.json()
