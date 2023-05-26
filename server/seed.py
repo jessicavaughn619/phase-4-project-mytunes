@@ -2,9 +2,7 @@ import os
 from faker import Faker
 from config import db, app
 import requests
-import json
 from models import User, Song, Artist, Playlist
-import ipdb
 
 fake = Faker()
 

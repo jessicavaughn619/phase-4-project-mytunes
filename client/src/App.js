@@ -11,6 +11,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
+  const [showFiltered, setShowFiltered] = useState(false);
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -27,10 +28,11 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (!showFiltered) {
     fetch("/music")
     .then(res => res.json())
-    .then(artists => setArtists(artists))
-  }, [])
+    .then(artists => setArtists(artists))}
+  }, [showFiltered])
 
   useEffect(() => {
     fetch("/playlists")
@@ -39,9 +41,14 @@ function App() {
   }, [])
 
   function handleSetArtist(id) {
-    const filteredArtist = artists.filter(artist => (artist.id === id))
-    setArtists(filteredArtist)
-  }
+    const filteredArtist = artists.filter(artist => (artist.id === id));
+    if (!showFiltered) {
+      setShowFiltered(showFiltered => !showFiltered);
+    }
+    else {
+      setShowFiltered(showFiltered => !showFiltered);
+      setArtists(filteredArtist);
+  }};
 
   return (
     <div id="app-container-wrapper">
