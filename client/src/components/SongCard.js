@@ -3,7 +3,7 @@ import '../stylesheets/SongCard.scss'
 
 const SongCard = ({song}) => {
     const { name, artist_name, image_url } = song;
-    
+
     return (
     <div id="song-card">
         <div className="image">
@@ -15,6 +15,7 @@ const SongCard = ({song}) => {
         <div className="artist">
             {artist_name}
         </div>
+        <button>+</button>
     </div>
     )
 }

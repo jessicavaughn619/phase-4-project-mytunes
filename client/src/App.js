@@ -38,6 +38,11 @@ function App() {
     .then(playlists => setPlaylists(playlists))
   }, [])
 
+  function handleSetArtist(id) {
+    const filteredArtist = artists.filter(artist => (artist.id === id))
+    setArtists(filteredArtist)
+  }
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -48,6 +53,7 @@ function App() {
         users={users} 
         artists={artists} 
         playlists={playlists}
+        onSetArtist={handleSetArtist}
         />}>
       </Route>
     </Routes>

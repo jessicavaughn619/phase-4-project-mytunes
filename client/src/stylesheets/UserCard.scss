@@ -1,1 +1,14 @@
 @import "../utilities/variables";
+
+#user-card {
+    align-items: center;
+}
+
+.name {
+    font-size: 16px;
+}
+
+.image {
+    height: 100px;
+    width: 100px;
+}

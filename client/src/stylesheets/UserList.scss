@@ -2,7 +2,7 @@
 
 #userlist-container-wrapper {
     background-color: $color-primary-light;
-    overflow: hidden;
+    overflow: scroll;
     height: 100vh;
     margin: 2rem;
 
@@ -13,9 +13,8 @@
 
     .swiper-slide {
         text-align: center;
-        font-size: 18px;
+        font-size: 16px;
         background: $color-primary-light;
-
         /* Center slide text vertically */
         display: flex;
         justify-content: center;
@@ -24,8 +23,8 @@
 
     .swiper-slide img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     }
 }

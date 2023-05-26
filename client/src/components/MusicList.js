@@ -8,7 +8,7 @@ import "../stylesheets/MusicList.scss";
 import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 
-const MusicList = ({ artists }) => {
+const MusicList = ({ artists, onSetArtist }) => {
 
   const genres = [];
   artists.map((artist) => (genres.push(artist.genres)));
@@ -17,9 +17,10 @@ const MusicList = ({ artists }) => {
 
   const allArtists = artists.map((artist) => (
     <SwiperSlide>
-      <ArtistCard
+      <ArtistCard 
           key={artist.id}
           artist={artist}
+          onSetArtist={onSetArtist}
       />
     </SwiperSlide>))
 

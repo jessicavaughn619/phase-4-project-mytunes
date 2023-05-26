@@ -1,1 +1,21 @@
 @import "../utilities/variables";
+
+.artist-card {
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    align-items: center;
+}
+
+.artist-card :hover {
+    cursor: pointer;
+}
+
+.name {
+    font-size: 16px;
+}
+
+.image {
+    height: 100px;
+    width: 100px;
+}
