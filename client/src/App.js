@@ -12,6 +12,8 @@ function App() {
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [showFiltered, setShowFiltered] = useState(false);
+  const [displayedArtists, setDisplayedArtists] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -28,11 +30,15 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!showFiltered) {
+    setIsLoading(true);
     fetch("/music")
     .then(res => res.json())
-    .then(artists => setArtists(artists))}
-  }, [showFiltered])
+    .then(artists => {
+      setArtists(artists);
+      setDisplayedArtists(artists);
+      setIsLoading(false);
+    });
+  }, [])
 
   useEffect(() => {
     fetch("/playlists")
@@ -42,12 +48,13 @@ function App() {
 
   function handleSetArtist(id) {
     const filteredArtist = artists.filter(artist => (artist.id === id));
-    if (!showFiltered) {
+    if (showFiltered) {
       setShowFiltered(showFiltered => !showFiltered);
+      setDisplayedArtists(filteredArtist);
     }
     else {
       setShowFiltered(showFiltered => !showFiltered);
-      setArtists(filteredArtist);
+      setDisplayedArtists(artists);
   }};
 
   return (
@@ -58,9 +65,10 @@ function App() {
         user={user} 
         onSetUser={setUser} 
         users={users} 
-        artists={artists} 
+        artists={displayedArtists} 
         playlists={playlists}
         onSetArtist={handleSetArtist}
+        isLoading={isLoading}
         />}>
       </Route>
     </Routes>

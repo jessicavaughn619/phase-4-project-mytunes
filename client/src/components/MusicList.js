@@ -8,7 +8,7 @@ import "../stylesheets/MusicList.scss";
 import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 
-const MusicList = ({ artists, onSetArtist }) => {
+const MusicList = ({ artists, onSetArtist, isLoading }) => {
 
   const genres = [];
   artists.map((artist) => (genres.push(artist.genres)));
@@ -43,8 +43,9 @@ const allSongs = artists.map((artist) => (
   ))))
 
   return (
-    <div id="musiclist-container-wrapper">
-        <h2>Artists</h2>
+      <div id="musiclist-container-wrapper">
+      {isLoading ? <h1>Loading</h1> :
+        <><h2>Artists</h2>
         <Swiper
         modules={[Scrollbar, FreeMode, Mousewheel]}
         spaceBetween={20}
@@ -73,7 +74,8 @@ const allSongs = artists.map((artist) => (
         mousewheel={true}
         scrollbar={{draggable: true }}>
             {allSongs}
-        </Swiper>
+        </Swiper></>
+      }
     </div>
   )
 }
