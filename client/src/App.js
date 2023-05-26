@@ -14,6 +14,7 @@ function App() {
   const [showFiltered, setShowFiltered] = useState(false);
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [lastClickedButton, setLastClickedButton] = useState(null);
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -47,22 +48,32 @@ function App() {
   }, [])
 
   function handleSetArtist(data) {
+    const clickedButton = data;
     let filteredArtist;
-    console.log(typeof data)
     if ((typeof data) === "number") {
       filteredArtist = artists.filter(artist => (artist.id === data))
   }
     else if ((typeof data) === "string") {
       filteredArtist = artists.filter(artist => (artist.genres === data))
   }
-      if (showFiltered) {
-          setShowFiltered(showFiltered => !showFiltered);
-          setDisplayedArtists(filteredArtist);
-        }
-        else {
-          setShowFiltered(showFiltered => !showFiltered);
-          setDisplayedArtists(artists);
-      }};
+
+    if (showFiltered) {
+      if (lastClickedButton === clickedButton) {
+        setShowFiltered(showFiltered => !showFiltered)
+        setDisplayedArtists(artists);
+        setLastClickedButton(clickedButton);
+      }
+      else {
+        setDisplayedArtists(filteredArtist);
+        setLastClickedButton(clickedButton);
+      }
+    }
+    else {
+      setShowFiltered(showFiltered => !showFiltered);
+      setDisplayedArtists(filteredArtist);
+      setLastClickedButton(clickedButton);
+    }
+  }
 
   return (
     <div id="app-container-wrapper">
