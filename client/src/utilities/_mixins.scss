@@ -1,0 +1,6 @@
+@mixin active-card {
+    cursor: pointer;
+    img {
+        border: 1px solid red;
+    }
+}

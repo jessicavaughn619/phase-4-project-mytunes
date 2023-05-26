@@ -1,6 +1,7 @@
 @import "../utilities/variables";
+@import "../utilities/mixins";
 
-#song-card {
+.song-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +15,32 @@
 .image {
     height: 100px;
     width: 100px;
+    position: relative;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgba(227, 96, 185, 0.8);
+    transition: opacity 0.3s;
+}
+
+.image:hover .overlay{
+    opacity: 1;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: black;
 }
 
 .artist {

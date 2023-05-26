@@ -8,7 +8,7 @@ import "../stylesheets/MusicList.scss";
 import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 
-const MusicList = ({ artists, onSetArtist, isLoading }) => {
+const MusicList = ({ artists, onSetArtist, isLoading, onAddToPlaylist }) => {
 
   const genres = [];
   artists.map((artist) => (genres.push(artist.genres)));
@@ -39,6 +39,7 @@ const allSongs = artists.map((artist) => (
       <SongCard
           key={song.id}
           song={song}
+          onAddToPlaylist={onAddToPlaylist}
       />
   </SwiperSlide>
   ))))

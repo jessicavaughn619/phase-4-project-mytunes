@@ -1,21 +1,28 @@
 import React from "react";
 import '../stylesheets/SongCard.scss'
 
-const SongCard = ({song}) => {
-    const { name, artist_name, image_url } = song;
+const SongCard = ({ song, onAddToPlaylist }) => {
+    const { name, artist_name, image_url, id } = song;
+    const nameLimit = (name.substring(0, 20)) + (name.length > 20 ? "..." : "")
+
+    function handleClick() {
+        onAddToPlaylist(id);
+    }
 
     return (
-    <div id="song-card">
+    <div className="song-card" onClick={handleClick}>
         <div className="image">
             <img src={image_url} alt={name}/>
+            <div className="overlay">
+                <span className="icon">+</span>
+            </div>
         </div>
         <div className="name">
-            {name}
+            {nameLimit}
         </div>
         <div className="artist">
             {artist_name}
         </div>
-        <button>+</button>
     </div>
     )
 }

@@ -2,16 +2,14 @@ import os
 from faker import Faker
 from config import db, app
 import requests
-from models import User, Song, Artist, Playlist
+from models import Song, Artist
 
 fake = Faker()
 
 with app.app_context():
-    print('Deleting existing data...')
-    User.query.delete()
+    print('Deleting existing artist and song data...')
     Song.query.delete()
     Artist.query.delete()
-    Playlist.query.delete()
 
     # Get artist ids from single playlist
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
@@ -42,7 +40,6 @@ with app.app_context():
         db.session.add_all(artists)
         db.session.commit()
 
-
     def create_song_instances():
         print("Creating song instances...")
         for artist_id in list(artist_ids):
@@ -63,44 +60,16 @@ with app.app_context():
             db.session.add_all(songs)
         db.session.commit()
 
-    def create_users():
-        print('Creating new users...')
-        users = []
-        for n in range(10):
-            user = User(
-                first_name=fake.first_name(),
-                last_name=fake.last_name(),
-                username=fake.user_name(),
-                image_url=fake.image_url(100, 100)
-                )
-            users.append(user)
-        db.session.add_all(users)
-
-    # print('Creating new playlists...')
-    # names = ["Jams", "Favorite Tunes", "Great Songs", "My Faves"]
-    # playlists = []
-    # for n in range(5):
-    #     playlist = Playlist(
-    #         name=rc(names),
-    #     )
-    #     playlists.append(playlist)
-    # db.session.add_all(playlists)
-
     get_artist_data()
     create_song_instances()
-    create_users()
     db.session.commit()
     
     # print('Relating records...')
-    # def relate_records(playlists, songs, users, artists):
+    # def relate_records(playlists, users):
     #     for playlist in playlists:
     #         playlist.user_id = rc(users)
     #     db.session.add_all(playlists)
-    #     for song in songs:
-    #         song.artist_id = rc(artists)
-    #     db.session.add_all(songs)
-    #     db.session.commit()
-    # relate_records(playlists, songs, users, artists)
+    # relate_records(playlists, users)
 
     print('Complete!')
 

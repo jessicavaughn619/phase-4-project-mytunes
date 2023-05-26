@@ -1,4 +1,5 @@
 @import "../utilities/variables";
+@import "../utilities/mixins";
 
 .genre-card {
     display: flex;
@@ -14,5 +15,5 @@
 .genre-container {
     height: 100px;
     width: 100px;
-    background-color: $color-bright;
+    background: linear-gradient($random-perc, $color-bright, $color-dark-variant 100%);
 }

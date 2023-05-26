@@ -75,6 +75,10 @@ function App() {
     }
   }
 
+  function handleAddToPlaylist(id) {
+    console.log(id)
+  }
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -87,6 +91,7 @@ function App() {
         playlists={playlists}
         onSetArtist={handleSetArtist}
         isLoading={isLoading}
+        onAddToPlaylist={handleAddToPlaylist}
         />}>
       </Route>
     </Routes>
