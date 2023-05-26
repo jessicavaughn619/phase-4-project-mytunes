@@ -46,16 +46,23 @@ function App() {
     .then(playlists => setPlaylists(playlists))
   }, [])
 
-  function handleSetArtist(id) {
-    const filteredArtist = artists.filter(artist => (artist.id === id));
-    if (showFiltered) {
-      setShowFiltered(showFiltered => !showFiltered);
-      setDisplayedArtists(filteredArtist);
-    }
-    else {
-      setShowFiltered(showFiltered => !showFiltered);
-      setDisplayedArtists(artists);
-  }};
+  function handleSetArtist(data) {
+    let filteredArtist;
+    console.log(typeof data)
+    if ((typeof data) === "number") {
+      filteredArtist = artists.filter(artist => (artist.id === data))
+  }
+    else if ((typeof data) === "string") {
+      filteredArtist = artists.filter(artist => (artist.genres === data))
+  }
+      if (showFiltered) {
+          setShowFiltered(showFiltered => !showFiltered);
+          setDisplayedArtists(filteredArtist);
+        }
+        else {
+          setShowFiltered(showFiltered => !showFiltered);
+          setDisplayedArtists(artists);
+      }};
 
   return (
     <div id="app-container-wrapper">

@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import "../stylesheets/GenreCard.scss";
 
-const GenreCard = ({genre}) => {
+const GenreCard = ({ genre, onSetArtist }) => {
+
+  function handleClick() {
+    onSetArtist(genre)
+  }
   return (
-    <div>
+    <div onClick={handleClick} className="genre-card">
+        <div className="genre-container">
         {genre}
+        </div>
     </div>
   )
 }

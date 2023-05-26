@@ -1,0 +1,18 @@
+@import "../utilities/variables";
+
+.genre-card {
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    align-items: center;
+}
+
+.genre-card :hover {
+    cursor: pointer;
+}
+
+.genre-container {
+    height: 100px;
+    width: 100px;
+    background-color: $color-bright;
+}

@@ -29,6 +29,7 @@ const allUniqueGenres = filteredUniqueGenres.map((genre) => (
     <GenreCard
         key={genre}
         genre={genre}
+        onSetArtist={onSetArtist}
     />
   </SwiperSlide>))
 
