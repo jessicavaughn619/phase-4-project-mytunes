@@ -2,12 +2,11 @@ import React from 'react'
 import '../stylesheets/PlaylistCard.scss';
 
 const PlaylistCard = ({playlist, onSetSelectedPlaylist, selectedPlaylist}) => {
-    const { name, id } = playlist;
+    const { name, id, user_id } = playlist;
 
     function handleClick() {
-      console.log(id)
-      console.log(selectedPlaylist)
-      onSetSelectedPlaylist()
+      onSetSelectedPlaylist(id);
+      console.log(user_id)
     }
 
   return (

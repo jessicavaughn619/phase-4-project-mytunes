@@ -7,10 +7,19 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
         <PlaylistCard 
         key={playlist.id}
         playlist={playlist}
+        onSetSelectedPlaylist={onSetSelectedPlaylist}
         />
     ))
 
-    const myPlaylists = playlists.filter((playlist) => playlist.user_id === user.id);
+    const myPlaylists = playlists
+    .filter((playlist) => (playlist.user_id === user.id))
+    .map((playlist) => (
+      <PlaylistCard
+      key={playlist.id}
+      playlist={playlist}
+      onSetSelectedPlaylist={onSetSelectedPlaylist}
+      />
+    ))
 
     function handleSubmit(e) {
       e.preventDefault()
@@ -31,6 +40,7 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
   return (
     <>
     <div id="playlists-container-wrapper">
+      <div>
         <h2>My Playlists</h2>
         {isClicked ? 
         <form onSubmit={handleSubmit}>
@@ -47,6 +57,7 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
           <button>Confirm Add Song</button>
         </form> : null}
         {myPlaylists}
+        </div>
         <h2>All Playlists</h2>
         {allPlaylists}
     </div>
