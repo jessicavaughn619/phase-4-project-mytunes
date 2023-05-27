@@ -15,6 +15,9 @@ function App() {
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [lastClickedButton, setLastClickedButton] = useState(null);
+  const [selectedPlaylist, setSelectedPlaylist] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
+  const [selectedSong, setSelectedSong] = useState(null);
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -47,6 +50,18 @@ function App() {
     .then(playlists => setPlaylists(playlists))
   }, [])
 
+  function handleSetSelectedPlaylist() {
+    setSelectedPlaylist(selectedPlaylist)
+  }
+
+  function handleSetSelectedPlaylist(playlist) {
+    setSelectedPlaylist(playlist)
+  }
+
+  function handleSetIsClicked() {
+    setIsClicked(isClicked => !isClicked)
+  }
+  
   function handleSetArtist(data) {
     const clickedButton = data;
     let filteredArtist;
@@ -75,18 +90,9 @@ function App() {
     }
   }
 
-  function handleAddToPlaylist(song_id, playlist_id=6) {
-    fetch("/playlists", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        song_id: song_id,
-        playlist_id: playlist_id,
-      }),
-    }).then((res) => res.json())
-    .then((data) => console.log(data))
+  function handleAddToPlaylist(song) {
+    handleSetIsClicked()
+    setSelectedSong(song)
   }
 
   return (
@@ -102,6 +108,11 @@ function App() {
         onSetArtist={handleSetArtist}
         isLoading={isLoading}
         onAddToPlaylist={handleAddToPlaylist}
+        onSetSelectedPlaylist={handleSetSelectedPlaylist}
+        selectedPlaylist={selectedPlaylist}
+        isClicked={isClicked}
+        selectedSong={selectedSong}
+        onSetIsClicked={handleSetIsClicked}
         />}>
       </Route>
     </Routes>

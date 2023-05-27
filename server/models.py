@@ -3,6 +3,10 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 from config import bcrypt, db
 
+playlist_songs = db.Table('playlist_songs',
+                          db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),
+                          db.Column('song_id', db.Integer, db.ForeignKey('songs.id')))
+
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
@@ -69,17 +73,9 @@ class Playlist(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    songs = db.relationship('Song', secondary=playlist_songs, backref='playlists')
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return f'<Playlist ID: {self.id} | Name: {self.name}>'
-    
-class PlaylistSong(db.Model, SerializerMixin):
-    __tablename__ = 'playlistsongs'
-
-    playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'), primary_key=True)
-    song_id = db.Column(db.Integer, db.ForeignKey('songs.id'), primary_key=True)
-
-    def __repr__(self):
-        return f'<Playlist ID: {self.playlist_id} | Song ID: {self.song_id}>'

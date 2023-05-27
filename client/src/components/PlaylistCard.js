@@ -1,11 +1,13 @@
 import React from 'react'
 import '../stylesheets/PlaylistCard.scss';
 
-const PlaylistCard = ({playlist}) => {
+const PlaylistCard = ({playlist, onSetSelectedPlaylist, selectedPlaylist}) => {
     const { name, id } = playlist;
 
     function handleClick() {
       console.log(id)
+      console.log(selectedPlaylist)
+      onSetSelectedPlaylist()
     }
 
   return (

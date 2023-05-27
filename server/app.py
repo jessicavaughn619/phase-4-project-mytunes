@@ -83,7 +83,6 @@ class CheckSession(Resource):
         return {'error': '401 Unauthorized'}, 401
 
 class Login(Resource):
-    
     def post(self):
 
         request_json = request.get_json()
@@ -103,7 +102,6 @@ class Login(Resource):
         return {'error': '401 Unauthorized'}, 401
 
 class Logout(Resource):
-    
     def delete(self):
         
         if session.get('user_id'):
@@ -113,7 +111,6 @@ class Logout(Resource):
             return {}, 204
         
         return {'error': '401 Unauthorized'}, 401
-
 
 api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Music, '/music', endpoint='music')
