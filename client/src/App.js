@@ -75,8 +75,18 @@ function App() {
     }
   }
 
-  function handleAddToPlaylist(id) {
-    console.log(id)
+  function handleAddToPlaylist(song_id, playlist_id=6) {
+    fetch("/playlists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        song_id: song_id,
+        playlist_id: playlist_id,
+      }),
+    }).then((res) => res.json())
+    .then((data) => console.log(data))
   }
 
   return (

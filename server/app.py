@@ -1,9 +1,9 @@
-from flask import request, session, jsonify, make_response, render_template
+from flask import request, session, jsonify, make_response
 from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db
-from models import User, Artist, Playlist
+from models import User, Artist, Playlist, Song
 
 api = Api(app)
 
@@ -25,8 +25,29 @@ class Playlists(Resource):
     def get(self):
         playlists = [playlist.to_dict() for playlist in Playlist.query.all()]
         return make_response(jsonify(playlists), 200)
-    
 
+class PlaylistSong(Resource):
+    def post(self):
+
+        request_json = request.get_json()
+
+        song_id = request_json['song_id']
+        playlist_id = request_json['playlist_id']
+
+        try:
+            playlist_song = PlaylistSong(
+                song_id=song_id,
+                playlist_id=playlist_id,
+            )
+            db.session.add(playlist_song)
+            db.session.commit()
+
+            return playlist_song.to_dict(), 201
+        
+        except IntegrityError:
+
+            return {'error': '422 Unprocessable Entity'}, 422
+    
 class Signup(Resource):
     def post(self):
         request_json = request.get_json()
@@ -97,6 +118,7 @@ class Logout(Resource):
 api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Music, '/music', endpoint='music')
 api.add_resource(Playlists, '/playlists', endpoint='playlists')
+api.add_resource(PlaylistSong, '/playlists/<int:playlist_id>/add_song')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')

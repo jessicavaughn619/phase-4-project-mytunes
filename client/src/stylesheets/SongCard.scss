@@ -26,12 +26,13 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    background-color: rgba(227, 96, 185, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     transition: opacity 0.3s;
 }
 
 .image:hover .overlay{
     opacity: 1;
+    cursor: pointer;
 }
 
 .icon {

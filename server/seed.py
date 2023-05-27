@@ -2,19 +2,30 @@ import os
 from faker import Faker
 from config import db, app
 import requests
-from models import Song, Artist
+import random
+from random import choice as rc
+from models import Song, Artist, User, Playlist, PlaylistSong
 
 fake = Faker()
 
 with app.app_context():
-    print('Deleting existing artist and song data...')
+
+    playlists = []
+    users = []
+    songs = []
+    playlist_songs = []
+
+    print('Deleting existing data...')
     Song.query.delete()
     Artist.query.delete()
+    User.query.delete()
+    Playlist.query.delete()
+    PlaylistSong.query.delete()
 
     # Get artist ids from single playlist
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        os.environ.get('AUTH')
+        "Authorization": "Bearer BQDk7EQ_3CeJdf-lMUCAAdleOVHxcIndvhEixA38jPP0DEVw7aFtOZ-EJw4XQDoO8u6l9G1PoSEcAWgSYGhNgCg9nJ7-4XrTILWJNnmwPGiv3yDgPw8"
     }
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -47,7 +58,6 @@ with app.app_context():
             response = requests.get(url, headers=headers)
             data = response.json()
             artist_name = data['tracks'][0]['artists'][0]['name']
-            songs = []
             for track in data['tracks']:
                 song = Song(
                     name=track['name'],
@@ -60,16 +70,48 @@ with app.app_context():
             db.session.add_all(songs)
         db.session.commit()
 
+    def create_users():
+        print('Creating new users...')
+        for n in range(10):
+            user = User(
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+                username=fake.user_name(),
+                image_url=fake.image_url(100, 100)
+                )
+            users.append(user)
+        db.session.add_all(users)
+        db.session.commit()
+    
+    def create_playlists():
+        print('Creating new playlists...')
+        names = ["Jams", "Favorite Tunes", "Great Songs", "My Faves"]
+        for n in range(5):
+            playlist = Playlist(
+                name=rc(names),
+            )
+            playlists.append(playlist)
+        db.session.add_all(playlists)
+        db.session.commit()
+
+    def seed_playlist_songs(playlists, songs, num_songs):
+        print('Creating playlist to songs relationships...')
+        for playlist in playlists:
+            playlist_id = playlist.id
+            selected_songs = random.sample(songs, num_songs)
+            for song in selected_songs:
+                song_id = song.id
+                playlist_songs.append(PlaylistSong(playlist_id=playlist_id, song_id=song_id))
+            db.session.add_all(playlist_songs)
+            db.session.commit()
+
     get_artist_data()
     create_song_instances()
-    db.session.commit()
+    create_users()
+    create_playlists()
+    seed_playlist_songs(playlists, songs, 3)
     
-    # print('Relating records...')
-    # def relate_records(playlists, users):
-    #     for playlist in playlists:
-    #         playlist.user_id = rc(users)
-    #     db.session.add_all(playlists)
-    # relate_records(playlists, users)
+    db.session.commit()
 
     print('Complete!')
 
