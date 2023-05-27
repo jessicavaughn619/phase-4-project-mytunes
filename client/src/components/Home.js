@@ -8,15 +8,15 @@ import "../stylesheets/Home.scss";
 function Home({ user, users, onSetUser, artists, playlists, onSetArtist, isLoading, onAddToPlaylist }) {
     return (
         <div id="home-container-wrapper">
-            <div id="nav-container-wrapper">
-                <NavBar 
-                user={user} onSetUser={onSetUser}/>
-            </div>
             <div id="content-container-wrapper">
+            <div id="nav-playlist-container-wrapper">
+                    <NavBar 
+                    user={user} onSetUser={onSetUser}/>
                 <div id="playlist-container-wrapper">
                     <Playlists
                     user={user}
                     playlists={playlists}/>
+                </div>
                 </div>
                 <div id="music-container-wrapper">
                     <MusicList 

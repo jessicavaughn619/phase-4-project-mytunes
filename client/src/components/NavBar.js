@@ -13,11 +13,11 @@ function NavBar({ user, onSetUser }) {
 return (
   <div id="navbar-container-wrapper">
     <p>Welcome, {user.username}!</p>
-    <div className="links">
-    <Link to="/">Home</Link>
-    <Link onClick={handleLogoutClick}>Logout</Link>
+    <div id="links">
+      <Link to="/">Home</Link>
+      <Link onClick={handleLogoutClick}>Logout</Link>
     </div>
-   </div>
+  </div>
 )
 }
 
