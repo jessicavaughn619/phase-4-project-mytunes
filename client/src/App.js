@@ -8,7 +8,7 @@ import './stylesheets/App.scss';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [showFiltered, setShowFiltered] = useState(false);
@@ -27,11 +27,11 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    fetch("/users")
-    .then(res => res.json())
-    .then(users => setUsers(users))
-  }, [])
+  // useEffect(() => {
+  //   fetch("/users")
+  //   .then(res => res.json())
+  //   .then(users => setUsers(users))
+  // }, [])
 
   useEffect(() => {
     setIsLoading(true);
@@ -99,7 +99,6 @@ function App() {
       <Route exact path='/' element={<Home
         user={user} 
         onSetUser={setUser} 
-        users={users} 
         artists={displayedArtists} 
         playlists={playlists}
         onSetArtist={handleSetArtist}
