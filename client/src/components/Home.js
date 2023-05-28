@@ -4,7 +4,10 @@ import Playlists from "./Playlists";
 import MusicList from "./MusicList";
 import "../stylesheets/Home.scss";
 
-function Home({ user, onSetUser, artists, playlists, onSetArtist, isLoading, onAddToPlaylist, onSetSelectedPlaylist, selectedPlaylist, isClicked, selectedSong, onSetIsClicked }) {
+function Home({ user, onSetUser, artists, playlists, 
+    onSetArtist, isLoading, onAddToPlaylist, 
+    onSetSelectedPlaylist, selectedPlaylist, isClicked, 
+    selectedSong, onSetIsClicked }) {
     return (
         <div id="home-container-wrapper">
             <div id="content-container-wrapper">

@@ -6,10 +6,12 @@
     flex-direction: column;
     height: 10rem;
     align-items: center;
+    transition: transform 0.3s ease;
 }
 
 .genre-card :hover {
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 .genre-container {

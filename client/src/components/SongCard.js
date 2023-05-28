@@ -11,7 +11,7 @@ const SongCard = ({ song, onAddToPlaylist }) => {
 
     return (
     <div className="song-card" onClick={handleClick}>
-        <div className="image">
+        <div className="image-song">
             <img src={image_url} alt={name}/>
             <div className="overlay">
                 <span className="icon">+</span>

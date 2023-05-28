@@ -19,4 +19,10 @@
 .image {
     height: 100px;
     width: 100px;
+    transition: transform 0.3s ease;
 }
+
+.image :hover {
+    transform: scale(1.1);
+}
+  

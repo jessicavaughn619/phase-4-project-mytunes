@@ -12,7 +12,7 @@
     font-size: 16px;
 }
 
-.image {
+.image-song {
     height: 100px;
     width: 100px;
     position: relative;
@@ -30,8 +30,8 @@
     transition: opacity 0.3s;
 }
 
-.image:hover .overlay{
-    opacity: 1;
+.image-song:hover .overlay{
+    opacity: .5;
     cursor: pointer;
 }
 

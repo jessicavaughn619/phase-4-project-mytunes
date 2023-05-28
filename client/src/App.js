@@ -8,7 +8,6 @@ import './stylesheets/App.scss';
 
 function App() {
   const [user, setUser] = useState(null);
-  // const [users, setUsers] = useState([]);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [showFiltered, setShowFiltered] = useState(false);
