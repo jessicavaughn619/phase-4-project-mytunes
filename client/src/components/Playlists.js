@@ -3,16 +3,15 @@ import PlaylistCard from './PlaylistCard';
 import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, isClicked, onSetIsClicked, selectedSong }) => {
-    const allPlaylists = playlists.map((playlist) => (
-        <PlaylistCard 
-        key={playlist.id}
-        playlist={playlist}
-        onSetSelectedPlaylist={onSetSelectedPlaylist}
-        />
-    ))
+    // const allPlaylists = playlists.map((playlist) => (
+    //     <PlaylistCard 
+    //     key={playlist.id}
+    //     playlist={playlist}
+    //     onSetSelectedPlaylist={onSetSelectedPlaylist}
+    //     />
+    // ))
 
-    const myPlaylists = playlists
-    .filter((playlist) => (playlist.user_id === user.id))
+    const myPlaylists = playlists.filter((playlist) => (playlist.user_id === user.id))
     .map((playlist) => (
       <PlaylistCard
       key={playlist.id}
@@ -24,17 +23,19 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
     function handleSubmit(e) {
       e.preventDefault()
       onSetIsClicked()
-      fetch("/playlists", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          song_id: selectedSong,
-          playlist_id: selectedPlaylist,
-        }),
-      }).then((res) => res.json())
-      .then((data) => console.log(data))
+      console.log(selectedPlaylist)
+      console.log(selectedSong)
+      // fetch(`/playlists/${selectedPlaylist}/add_song`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     song_id: selectedSong,
+      //     playlist_id: selectedPlaylist,
+      //   }),
+      // }).then((res) => res.json())
+      // .then((data) => console.log(data))
     }
 
   return (
@@ -50,7 +51,7 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
               --Select Playlist--
             </option>
             {myPlaylists.map((playlist, index) => (
-            <option value={playlist} key={index}>
+            <option value={playlist.id} key={index}>
               {playlist}
             </option>))}
           </select>
@@ -58,8 +59,8 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
         </form> : null}
         {myPlaylists}
         </div>
-        <h2>All Playlists</h2>
-        {allPlaylists}
+        {/* <h2>All Playlists</h2>
+        {allPlaylists} */}
     </div>
     </>
   )

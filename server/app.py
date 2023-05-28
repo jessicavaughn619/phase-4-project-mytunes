@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db
-from models import User, Artist, Playlist, Song
+from models import User, Artist, Playlist, Song, playlist_songs
 
 api = Api(app)
 
@@ -35,7 +35,7 @@ class PlaylistSong(Resource):
         playlist_id = request_json['playlist_id']
 
         try:
-            playlist_song = PlaylistSong(
+            playlist_song = playlist_songs(
                 song_id=song_id,
                 playlist_id=playlist_id,
             )

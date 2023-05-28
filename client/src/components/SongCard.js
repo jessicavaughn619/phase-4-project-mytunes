@@ -5,8 +5,6 @@ const SongCard = ({ song, onAddToPlaylist }) => {
     const { name, artist_name, image_url, id } = song;
     const nameLimit = (name.substring(0, 20)) + (name.length > 20 ? "..." : "")
 
-
-
     function handleClick() {
         onAddToPlaylist(id);
     }

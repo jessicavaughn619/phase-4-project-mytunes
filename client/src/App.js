@@ -50,12 +50,9 @@ function App() {
     .then(playlists => setPlaylists(playlists))
   }, [])
 
-  function handleSetSelectedPlaylist() {
-    setSelectedPlaylist(selectedPlaylist)
-  }
-
   function handleSetSelectedPlaylist(playlist) {
-    setSelectedPlaylist(playlist)
+    console.log(playlist)
+    // setSelectedPlaylist(playlist.id)
   }
 
   function handleSetIsClicked() {
