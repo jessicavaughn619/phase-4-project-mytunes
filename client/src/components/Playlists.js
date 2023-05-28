@@ -3,14 +3,6 @@ import PlaylistCard from './PlaylistCard';
 import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, isClicked, onSetIsClicked, selectedSong }) => {
-    // const allPlaylists = playlists.map((playlist) => (
-    //     <PlaylistCard 
-    //     key={playlist.id}
-    //     playlist={playlist}
-    //     onSetSelectedPlaylist={onSetSelectedPlaylist}
-    //     />
-    // ))
-
     const myPlaylists = playlists.filter((playlist) => (playlist.user_id === user.id))
     .map((playlist) => (
       <PlaylistCard
@@ -59,8 +51,6 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist, selectedPlaylist, i
         </form> : null}
         {myPlaylists}
         </div>
-        {/* <h2>All Playlists</h2>
-        {allPlaylists} */}
     </div>
     </>
   )

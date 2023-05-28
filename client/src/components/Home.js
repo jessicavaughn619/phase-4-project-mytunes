@@ -1,5 +1,4 @@
 import React from "react";
-// import UserList from "./UserList";
 import NavBar from "./NavBar";
 import Playlists from "./Playlists";
 import MusicList from "./MusicList";
@@ -30,10 +29,6 @@ function Home({ user, onSetUser, artists, playlists, onSetArtist, isLoading, onA
                     isLoading={isLoading}
                     onAddToPlaylist={onAddToPlaylist}
                     />
-                {/* <div id="user-container-wrapper">
-                    <UserList 
-                    users={users}/>
-                </div> */}
             </div>
         </div>
     )

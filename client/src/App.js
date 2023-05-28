@@ -27,12 +27,6 @@ function App() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   fetch("/users")
-  //   .then(res => res.json())
-  //   .then(users => setUsers(users))
-  // }, [])
-
   useEffect(() => {
     setIsLoading(true);
     fetch("/music")
