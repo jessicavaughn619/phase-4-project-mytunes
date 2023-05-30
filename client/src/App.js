@@ -10,6 +10,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
+  const [displayedPlaylists, setDisplayedPlaylists] = useState([])
   const [showFiltered, setShowFiltered] = useState(false);
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,6 +87,11 @@ function App() {
     setSelectedSong(song)
   }
 
+  function handleAddNewPlaylist(newPlaylist) {
+    const updatedPlaylists = [...playlists, newPlaylist]
+    setPlaylists(updatedPlaylists)
+  }
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -103,6 +109,7 @@ function App() {
         isClicked={isClicked}
         selectedSong={selectedSong}
         onSetIsClicked={handleSetIsClicked}
+        onAddNewPlaylist={handleAddNewPlaylist}
         />}>
       </Route>
     </Routes>

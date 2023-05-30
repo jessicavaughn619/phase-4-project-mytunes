@@ -7,7 +7,8 @@ import "../stylesheets/Home.scss";
 function Home({ user, onSetUser, artists, playlists, 
     onSetArtist, isLoading, onAddToPlaylist, 
     onSetSelectedPlaylist, selectedPlaylist, isClicked, 
-    selectedSong, onSetIsClicked }) {
+    selectedSong, onSetIsClicked, onAddNewPlaylist }) {
+
     return (
         <div id="home-container-wrapper">
             <div id="content-container-wrapper">
@@ -23,6 +24,7 @@ function Home({ user, onSetUser, artists, playlists,
                     isClicked={isClicked}
                     selectedSong={selectedSong}
                     onSetIsClicked={onSetIsClicked}
+                    onAddNewPlaylist={onAddNewPlaylist}
                     />
                 </div>
                 </div>

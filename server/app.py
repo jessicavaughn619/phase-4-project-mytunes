@@ -25,6 +25,19 @@ class Playlists(Resource):
     def get(self):
         playlists = [playlist.to_dict() for playlist in Playlist.query.all()]
         return make_response(jsonify(playlists), 200)
+    
+    def post(self):
+        data = request.get_json()
+
+        new_playlist = Playlist(
+            name=data['playlistName'],
+            user_id=session['user_id'],
+        )
+
+        db.session.add(new_playlist)
+        db.session.commit()
+
+        return make_response(new_playlist.to_dict(), 201)
 
 class PlaylistSong(Resource):
     def post(self):
