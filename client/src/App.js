@@ -19,33 +19,34 @@ function App() {
   const [selectedSong, setSelectedSong] = useState(null);
 
   useEffect(() => {
-    fetch("/check_session").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
+    const fetchData = async () => {
+      try {
+        const check_session_response = await fetch("/check_session");
+        if (check_session_response.ok) {
+          const user = await check_session_response.json();
+          setUser(user);
+        }
+
+        setIsLoading(true);
+        const music_response = await fetch("/music");
+        const artists = await music_response.json();
+        setArtists(artists);
+        setDisplayedArtists(artists);
+
+        const playlists_response = await fetch("/playlists");
+        const playlists = await playlists_response.json();
+        setPlaylists(playlists);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
       }
-    });
+    };
+
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("/music")
-    .then(res => res.json())
-    .then(artists => {
-      setArtists(artists);
-      setDisplayedArtists(artists);
-      setIsLoading(false);
-    });
-  }, [])
-
-  useEffect(() => {
-    fetch("/playlists")
-    .then(res => res.json())
-    .then(playlists => setPlaylists(playlists))
-  }, [])
-
   function handleSetSelectedPlaylist(playlist) {
-    console.log(playlist)
-    // setSelectedPlaylist(playlist.id)
+    setSelectedPlaylist(playlist)
   }
 
   function handleSetIsClicked() {

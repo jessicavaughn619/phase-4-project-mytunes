@@ -29,20 +29,17 @@ class Playlists(Resource):
 class PlaylistSong(Resource):
     def post(self):
 
-        request_json = request.get_json()
-
-        song_id = request_json['song_id']
-        playlist_id = request_json['playlist_id']
+        data = request.get_json()
 
         try:
             playlist_song = playlist_songs(
-                song_id=song_id,
-                playlist_id=playlist_id,
+                song_id=data['song_id'],
+                playlist_id=data['playlist_id'],
             )
             db.session.add(playlist_song)
             db.session.commit()
 
-            return playlist_song.to_dict(), 201
+            return make_response(playlist_song.to_dict(), 201)
         
         except IntegrityError:
 
