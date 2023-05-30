@@ -10,7 +10,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [artists, setArtists] =  useState([]);
   const [playlists, setPlaylists] = useState([]);
-  const [displayedPlaylists, setDisplayedPlaylists] = useState([])
   const [showFiltered, setShowFiltered] = useState(false);
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -92,6 +91,15 @@ function App() {
     setPlaylists(updatedPlaylists)
   }
 
+  function handleDeletePlaylist(id) {
+    fetch(`/playlists/${id}`, {
+      method: "DELETE"
+    })
+    alert("Playlist deleted!")
+    const updatedPlaylists = playlists.filter((playlist) => (playlist.id !== id))
+    setPlaylists(updatedPlaylists)
+}
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -110,6 +118,7 @@ function App() {
         selectedSong={selectedSong}
         onSetIsClicked={handleSetIsClicked}
         onAddNewPlaylist={handleAddNewPlaylist}
+        onDeletePlaylist={handleDeletePlaylist}
         />}>
       </Route>
     </Routes>

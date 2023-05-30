@@ -1,20 +1,28 @@
 import React, { useState } from 'react'
 import '../stylesheets/PlaylistCard.scss';
 
-const PlaylistCard = ({ playlist }) => {
-    const { name, songs } = playlist;
+const PlaylistCard = ({ playlist, onDeletePlaylist }) => {
+    const { name, songs, id } = playlist;
     const [isClickedPlaylist, setIsClickedPlaylist] = useState(false)
 
     function handleClick() {
       setIsClickedPlaylist(isClickedPlaylist => !isClickedPlaylist)
     }
 
+    function handleDeleteClick() {
+      onDeletePlaylist(id)
+    }
+
   return (
     <div className="playlist-names" onClick={handleClick}>
-      {name}
       {isClickedPlaylist ? 
+      <div>
+        <div className="name">{name}</div>
         <li>{songs}</li>
-      : null}
+        <p onClick={handleDeleteClick} id={id}>Delete Playlist</p>
+        </div>
+      : <div className="name">
+      {name}</div>}
     </div>
   )
 }

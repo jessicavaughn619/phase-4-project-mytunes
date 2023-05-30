@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PlaylistCard from './PlaylistCard';
 import '../stylesheets/Playlists.scss';
 
-const Playlists = ({ user, playlists, onSetSelectedPlaylist, 
-  selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist }) => {
+const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist, 
+  selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, onDeletePlaylist }) => {
     
     const [playlistForm, setPlaylistForm] = useState(false);
     const [playlistName, setPlaylistName] = useState("");
@@ -14,6 +14,7 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist,
       <PlaylistCard
       key={playlist.id}
       playlist={playlist}
+      onDeletePlaylist={onDeletePlaylist}
       />
     ))
 
@@ -43,7 +44,8 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ 
-          name: playlistName }),
+          name: playlistName, 
+        }),
       }).then((r) => r.json())
       .then((newPlaylist) => onAddNewPlaylist(newPlaylist))
       alert("New playlist added!")
@@ -54,11 +56,12 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist,
   return (
     <>
     <div id="playlists-container-wrapper">
+    {isLoading ? <h1>Loading</h1> : 
       <div>
         <h2>My Playlists</h2>
         {isClicked ? 
         <form onSubmit={handleSubmit}>
-          <p>Select Playlist to Add Song:</p>
+          <p>+ Song to Playlist:</p>
           <select value={selectedPlaylist} onChange={(e) => onSetSelectedPlaylist(e.target.value)}>
             <option value = "">
               --Select Playlist--
@@ -70,7 +73,7 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist,
           </select>
           <button>Confirm Add Song</button>
         </form> : null}
-        <p onClick={handleClick}>{playlistForm ? "- Close Form" : "+ New Playlist"}</p>
+        <p onClick={handleClick}>{playlistForm ? "X Close" : "+ New Playlist"}</p>
         {playlistForm ? 
         <form onSubmit={handleNewPlaylistSubmit}>
           <label htmlFor="playlistName">New Playlist Name:</label>
@@ -85,6 +88,7 @@ const Playlists = ({ user, playlists, onSetSelectedPlaylist,
         </form> : null}
         {myPlaylists}
         </div>
+    }
     </div>
     </>
   )

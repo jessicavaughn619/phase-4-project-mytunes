@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db
-from models import User, Artist, Playlist, Song, playlist_songs
+from models import User, Artist, Playlist, playlist_songs
 
 api = Api(app)
 
@@ -27,10 +27,12 @@ class Playlists(Resource):
         return make_response(jsonify(playlists), 200)
     
     def post(self):
-        data = request.get_json()
+        request_json = request.get_json()
+
+        name = request_json.get('name')
 
         new_playlist = Playlist(
-            name=data['playlistName'],
+            name=name,
             user_id=session['user_id'],
         )
 
@@ -39,24 +41,34 @@ class Playlists(Resource):
 
         return make_response(new_playlist.to_dict(), 201)
 
-class PlaylistSong(Resource):
-    def post(self):
-
-        data = request.get_json()
-
-        try:
-            playlist_song = playlist_songs(
-                song_id=data['song_id'],
-                playlist_id=data['playlist_id'],
-            )
-            db.session.add(playlist_song)
+class PlaylistByID(Resource):
+    def delete(self, id):
+        playlist = Playlist.query.filter_by(id=id).first()
+        if playlist:
+            db.session.delete(playlist)
             db.session.commit()
+            return {"message": "Playlist deleted successfully."}, 204
+        else: 
+            return {"error": "Playlist not found."}, 404
 
-            return make_response(playlist_song.to_dict(), 201)
+# class PlaylistSong(Resource):
+#     def post(self):
+
+#         data = request.get_json()
+
+#         try:
+#             playlist_song = playlist_songs(
+#                 song_id=data['song_id'],
+#                 playlist_id=data['playlist_id'],
+#             )
+#             db.session.add(playlist_song)
+#             db.session.commit()
+
+#             return make_response(playlist_song.to_dict(), 201)
         
-        except IntegrityError:
+#         except IntegrityError:
 
-            return {'error': '422 Unprocessable Entity'}, 422
+#             return {'error': '422 Unprocessable Entity'}, 422
     
 class Signup(Resource):
     def post(self):
@@ -125,7 +137,8 @@ class Logout(Resource):
 api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Music, '/music', endpoint='music')
 api.add_resource(Playlists, '/playlists', endpoint='playlists')
-api.add_resource(PlaylistSong, '/playlists/<int:playlist_id>/add_song')
+api.add_resource(PlaylistByID, '/playlists/<int:id>')
+# api.add_resource(PlaylistSong, '/playlists/<int:playlist_id>/add_song')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
