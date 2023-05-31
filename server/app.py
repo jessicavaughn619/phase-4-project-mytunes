@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db
-from models import User, Artist, Playlist, playlist_songs
+from models import User, Artist, Playlist, Song
 
 api = Api(app)
 
@@ -38,8 +38,7 @@ class Playlists(Resource):
 
         db.session.add(new_playlist)
         db.session.commit()
-
-        return make_response(new_playlist.to_dict(), 201)
+        return new_playlist.to_dict(), 201
 
 class PlaylistByID(Resource):
     def delete(self, id):
@@ -51,24 +50,22 @@ class PlaylistByID(Resource):
         else: 
             return {"error": "Playlist not found."}, 404
 
-# class PlaylistSong(Resource):
-#     def post(self):
+class PlaylistSong(Resource):
+    def post(self, id):
 
-#         data = request.get_json()
+        request_json = request.get_json()
+        song_id = request_json.get('song_id')
 
-#         try:
-#             playlist_song = playlist_songs(
-#                 song_id=data['song_id'],
-#                 playlist_id=data['playlist_id'],
-#             )
-#             db.session.add(playlist_song)
-#             db.session.commit()
+        try:
+            playlist = Playlist.query.filter_by(id=id).first()
+            song = Song.query.filter_by(id=song_id).first()
 
-#             return make_response(playlist_song.to_dict(), 201)
+            playlist.songs.append(song)
+            db.session.commit()
+            return song.to_dict(), 201
         
-#         except IntegrityError:
-
-#             return {'error': '422 Unprocessable Entity'}, 422
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
     
 class Signup(Resource):
     def post(self):
@@ -138,7 +135,7 @@ api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Music, '/music', endpoint='music')
 api.add_resource(Playlists, '/playlists', endpoint='playlists')
 api.add_resource(PlaylistByID, '/playlists/<int:id>')
-# api.add_resource(PlaylistSong, '/playlists/<int:playlist_id>/add_song')
+api.add_resource(PlaylistSong, '/playlists/<int:id>/songs', endpoint='playlist_song')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')

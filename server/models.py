@@ -3,7 +3,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 from config import bcrypt, db
 
-playlist_songs = db.Table('playlist_songs',
+playlist_song = db.Table('playlist_songs',
                           db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),
                           db.Column('song_id', db.Integer, db.ForeignKey('songs.id')))
 
@@ -57,23 +57,30 @@ class Artist(db.Model, SerializerMixin):
 class Song(db.Model, SerializerMixin):
     __tablename__ = "songs"
 
+    serialize_rules = ('-playlists.song', '-playlists.songs', )
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     artist_name = db.Column(db.String, nullable=False)
     album = db.Column(db.String, nullable=False)
     image_url = db.Column(db.String, nullable=False)
 
+    playlists = db.relationship('Playlist', secondary=playlist_song, back_populates='songs')
+
     artist_id = db.Column(db.String, db.ForeignKey('artists.spotify_id'))
 
     def __repr__(self):
-        return f'<Song ID: {self.id} | Name: {self.name} | Artist: {self.artist} | Album: {self.album} | Genre: {self.genre} | Spotify ID: {self.spotify_id}>'
+        return f'<Song ID: {self.id} | Name: {self.name} | Artist: {self.artist_name} | Album: {self.album}>'
     
 class Playlist(db.Model, SerializerMixin):
     __tablename__ = "playlists"
 
+    serialize_rules = ('-songs.playlist', '-songs.playlists')
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    songs = db.relationship('Song', secondary=playlist_songs, backref='playlists')
+
+    songs = db.relationship('Song', secondary=playlist_song, back_populates='playlists')
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

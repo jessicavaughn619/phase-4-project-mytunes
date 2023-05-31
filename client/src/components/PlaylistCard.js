@@ -18,7 +18,7 @@ const PlaylistCard = ({ playlist, onDeletePlaylist }) => {
       {isClickedPlaylist ? 
       <div>
         <div className="name">{name}</div>
-        <li>{songs}</li>
+          <li>{songs}</li>
         <p onClick={handleDeleteClick} id={id}>Delete Playlist</p>
         </div>
       : <div className="name">

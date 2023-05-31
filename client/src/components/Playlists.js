@@ -20,16 +20,30 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
 
     function handleSubmit(e) {
       e.preventDefault()
-      fetch(`/playlists/${selectedPlaylist}/add_song`, {
+      const id = selectedPlaylist;
+      fetch(`/playlists/${id}/songs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedSong, selectedPlaylist }),
-      }).then((r) => r.json())
-      .then((data) => console.log(data))
-      alert("Song added to playlist!")
-      onSetIsClicked(false)
+        body: JSON.stringify({ 
+          song_id: selectedSong, 
+        }),
+      }).then((r) => {
+        if (r.ok) {
+          console.log("Song added to playlist!");
+          alert("Song added to playlist!");
+        } else {
+          throw new Error("Failed to add song to playlist");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to add song to playlist");
+      })
+      .finally(() => {
+        onSetIsClicked(false);
+      });
     }
 
     function handleClick() {

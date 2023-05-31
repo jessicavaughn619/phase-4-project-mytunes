@@ -1,8 +1,8 @@
-"""Add tables
+"""Add tables, new songs relationship
 
-Revision ID: 1388a5156778
+Revision ID: 08443bd0fef6
 Revises: 
-Create Date: 2023-05-27 14:17:04.841414
+Create Date: 2023-05-31 12:17:18.137081
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1388a5156778'
+revision = '08443bd0fef6'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -4,7 +4,7 @@ from config import db, app
 import requests
 import random
 from random import choice as rc
-from models import Song, Artist, User, Playlist
+from models import Song, Artist, User, Playlist, playlist_song
 
 fake = Faker()
 
@@ -13,23 +13,30 @@ with app.app_context():
     playlists = []
     users = []
     songs = []
-    # playlist_songs = []
 
     print('Deleting existing data...')
-    Song.query.delete()
-    Artist.query.delete()
-    User.query.delete()
-    Playlist.query.delete()
+    db.session.query(playlist_song).delete()
+    db.session.commit()
 
-    # Get artist ids from single playlist
+    Playlist.query.delete()
+    db.session.commit()
+
+    Song.query.delete()
+    db.session.commit()
+
+    Artist.query.delete()
+    db.session.commit()
+
+    User.query.delete()
+    db.session.commit()
+
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": os.environ.get('AUTH')
+        "Authorization": "Bearer BQB0Y5RIuTzZ_hJRgUjmWGsvrNueSZ0F6FXXb007SCKCy4lpUt7HWVL7bfjxXOqC0GyDMRPQSogOgl76Uy8dz-OWrFWofRaKYRydi-wz5xOg5qQPlc4"
     }
     response = requests.get(url, headers=headers)
     data = response.json()
 
-    # Extract artist Spotify IDs
     artist_ids = {track['track']['artists'][0]['id'] for track in data['items']}
 
     def get_artist_data():
@@ -85,30 +92,21 @@ with app.app_context():
     def create_playlists():
         print('Creating new playlists...')
         names = ["Jams", "Favorite Tunes", "Great Songs", "My Faves"]
+        songs = Song.query.all()
         for n in range(5):
             playlist = Playlist(
                 name=rc(names),
+                songs=random.sample(songs, 5)
             )
             playlists.append(playlist)
         db.session.add_all(playlists)
         db.session.commit()
 
-    # def seed_playlist_songs(playlists, songs, num_songs):
-    #     print('Creating playlist to songs relationships...')
-    #     for playlist in playlists:
-    #         playlist_id = playlist.id
-    #         selected_songs = random.sample(songs, num_songs)
-    #         for song in selected_songs:
-    #             song_id = song.id
-    #             playlist_songs.append(PlaylistSong(playlist_id=playlist_id, song_id=song_id))
-    #         db.session.add_all(playlist_songs)
-    #         db.session.commit()
 
     get_artist_data()
     create_song_instances()
     create_users()
     create_playlists()
-    # seed_playlist_songs(playlists, songs, 3)
     
     db.session.commit()
 
