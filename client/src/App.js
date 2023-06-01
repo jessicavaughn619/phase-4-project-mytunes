@@ -114,6 +114,21 @@ function App() {
     setPlaylists(updatedPlaylists)
 }
 
+  function handleDeleteSong(songId, id) {
+    fetch(`/playlists/${id}/songs/${songId}`, {
+      method: "DELETE"
+    })
+    alert("Song deleted from playlist!")
+    const updatedPlaylists = playlists.map(playlist => {
+      if (playlist.id === id) {
+        const updatedSongs = playlist.songs.filter(song => (song.id !== parseInt(songId)))
+        return {...playlist, songs: updatedSongs};
+      }
+      return playlist;
+    })
+    setPlaylists(updatedPlaylists)
+  }
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -134,6 +149,7 @@ function App() {
         onAddNewPlaylist={handleAddNewPlaylist}
         onDeletePlaylist={handleDeletePlaylist}
         onAddSong={handleAddSong}
+        onDeleteSong={handleDeleteSong}
         />}>
       </Route>
     </Routes>

@@ -68,7 +68,21 @@ class PlaylistSong(Resource):
         
         except IntegrityError:
             return {'error': '404 Playlist or Song not found'}, 404
-    
+
+class PlaylistSongByID(Resource):
+    def delete(self, songId, id):
+
+        try:
+            playlist = Playlist.query.filter_by(id=id).first()
+            song = Song.query.filter_by(id=songId).first()
+
+            playlist.songs.remove(song)
+            db.session.commit()
+            return {'message': 'Song deleted from playlist'}, 200
+
+        except IntegrityError:
+            return {'error': '404 Playlist or Song not found'}, 404
+
 class Signup(Resource):
     def post(self):
         request_json = request.get_json()
@@ -138,6 +152,7 @@ api.add_resource(Music, '/music', endpoint='music')
 api.add_resource(Playlists, '/playlists', endpoint='playlists')
 api.add_resource(PlaylistByID, '/playlists/<int:id>')
 api.add_resource(PlaylistSong, '/playlists/<int:id>/songs', endpoint='playlist_song')
+api.add_resource(PlaylistSongByID, '/playlists/<int:id>/songs/<int:songId>', methods=['DELETE'])
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')

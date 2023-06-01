@@ -1,16 +1,30 @@
 import React, { useState } from 'react'
 import '../stylesheets/PlaylistCard.scss';
 
-const PlaylistCard = ({ playlist, onDeletePlaylist }) => {
+const PlaylistCard = ({ playlist, onDeletePlaylist, onDeleteSong }) => {
     const { name, songs, id } = playlist;
     const [isClickedPlaylist, setIsClickedPlaylist] = useState(false)
+    const [isDeleteClicked, setIsDeleteClicked] = useState(false)
+    const [isEditPlaylist, setIsEditPlaylist] = useState(false)
 
     function handleClick() {
       setIsClickedPlaylist(isClickedPlaylist => !isClickedPlaylist)
     }
 
-    function handleDeleteClick() {
+    function handleFirstDeleteClick() {
+      setIsDeleteClicked(isDeleteClicked => !isDeleteClicked)
+    }
+
+    function handleConfirmDeleteClick() {
       onDeletePlaylist(id)
+    }
+
+    function handleFirstEditClick() {
+      setIsEditPlaylist(isEditPlaylist => !isEditPlaylist)
+    }
+    
+    function handleDeleteSong(e) {
+      onDeleteSong(e.target.id, id)
     }
 
   return (
@@ -21,16 +35,28 @@ const PlaylistCard = ({ playlist, onDeletePlaylist }) => {
         </div>   
           {isClickedPlaylist ?
           <div>
-          <ul>
+          <ul className={isEditPlaylist ? "edit-playlist" : "playlist-items"}>
             {songs.map((song) => (
-              <div>
-                <p>{song.name} - {song.artist_name}</p>
+              <div className="edit-container">
+                {isEditPlaylist? 
+                <div>
+                  <p className="delete-song" id={song.id} onClick={handleDeleteSong}>X</p>
+                </div> : null}
+                <div>
+                  <p>{song.name} - {song.artist_name}</p>
+                </div>
               </div>))}
           </ul>
         <div className="playlist-options">
-          <p className="edit">Edit Playlist</p>
-          <p className="delete" onClick={handleDeleteClick} id={id}>Delete Playlist</p>
+          <p className="edit" onClick={handleFirstEditClick}>{isEditPlaylist ? "- Close Editer" : "+ Edit Playlist"}</p>
+          <p className="delete" onClick={handleFirstDeleteClick} id={id}>X Delete Playlist</p>
         </div>
+          {isDeleteClicked ? 
+          <div className="delete-confirm">
+            <p>Confirm Delete?</p>
+            <p id="yes-delete" onClick={handleConfirmDeleteClick}>Yes</p>
+            <p id="no-delete" onClick={handleFirstDeleteClick}>No</p>
+          </div>: null}
         </div>
       : null }
     </div>

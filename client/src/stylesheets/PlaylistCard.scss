@@ -23,3 +23,34 @@
 .playlist-names {
     margin: .75rem;
 }
+
+.delete-confirm {
+    display: flex;
+    justify-content: space-between;
+}
+
+#yes-delete:hover, #no-delete:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.edit-container {
+    display: flex;
+}
+
+.playlist-items {
+    padding-left: 3rem;
+}
+.edit-playlist {
+    padding-left: 0;
+}
+
+.delete-song {
+    padding-left: 1.2em;
+    padding-right: 1.2rem;
+}
+
+.delete-song:hover {
+    cursor: pointer;
+    color: white;
+}

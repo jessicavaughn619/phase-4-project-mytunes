@@ -4,6 +4,7 @@
     background-color: $color-primary-light;
     height: 100vh;
     padding: .5rem;
+    cursor: default;
 }
 
 .new-playlist-container {
@@ -14,4 +15,5 @@
 
 #create-playlist:hover {
     color: white;
+    cursor: pointer;
 }

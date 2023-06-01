@@ -3,7 +3,8 @@ import PlaylistCard from './PlaylistCard';
 import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist, 
-  selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, onDeletePlaylist, onAddSong }) => {
+  selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, 
+  onDeletePlaylist, onAddSong, onDeleteSong }) => {
     
     const [playlistForm, setPlaylistForm] = useState(false);
     const [playlistName, setPlaylistName] = useState("");
@@ -15,6 +16,7 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       key={playlist.id}
       playlist={playlist}
       onDeletePlaylist={onDeletePlaylist}
+      onDeleteSong={onDeleteSong}
       />
     ))
 
