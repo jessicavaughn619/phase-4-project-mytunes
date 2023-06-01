@@ -4,10 +4,13 @@
     display: flex;
     flex-direction: column;
     background-color: $color-bright;
-    height: 15vh;
+    padding: .5rem;
 }
 
 #links a {
-    font-size: .75rem;
-    padding: .25rem;
+    font-size: 1rem;
+}
+
+#welcome {
+    font-style: italic;
 }

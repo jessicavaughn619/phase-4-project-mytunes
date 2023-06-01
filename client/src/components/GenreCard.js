@@ -7,9 +7,9 @@ const GenreCard = ({ genre, onSetArtist }) => {
     onSetArtist(genre)
   }
   return (
-    <div onClick={handleClick} className="genre-card">
-        <div className="genre-container">
-        {genre}
+    <div className="genre-card">
+        <div onClick={handleClick} className="genre-container">
+          <p id="genre-name">{genre}</p>
         </div>
     </div>
   )

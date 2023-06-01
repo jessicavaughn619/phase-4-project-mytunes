@@ -8,21 +8,19 @@
     align-items: center;
 }
 
-.artist-card :hover {
-    cursor: pointer;
-}
-
 .name {
     font-size: 16px;
+    cursor: default;
 }
 
 .image {
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
+    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
-.image :hover {
+.image:hover {
     transform: scale(1.1);
 }
   

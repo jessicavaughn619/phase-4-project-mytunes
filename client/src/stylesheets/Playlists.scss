@@ -2,5 +2,16 @@
 
 #playlists-container-wrapper {
     background-color: $color-primary-light;
-    height: 85vh;
+    height: 100vh;
+    padding: .5rem;
+}
+
+.new-playlist-container {
+    display: flex;
+    flex-direction: column;
+    margin: .75rem;
+}
+
+#create-playlist:hover {
+    color: white;
 }

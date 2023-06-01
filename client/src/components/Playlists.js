@@ -31,7 +31,6 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
         body: JSON.stringify(songData),
       }).then((r) => {
         if (r.ok) {
-          console.log("Song added to playlist!");
           alert("Song added to playlist!");
           onAddSong(songId, id)
         } else {
@@ -44,6 +43,7 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       })
       .finally(() => {
         onSetIsClicked(false);
+        onSetSelectedPlaylist('')
       });
     }
 
@@ -88,19 +88,21 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
           </select>
           <button>Confirm Add Song</button>
         </form> : null}
-        <p onClick={handleClick}>{playlistForm ? "X Close" : "+ New Playlist"}</p>
-        {playlistForm ? 
-        <form onSubmit={handleNewPlaylistSubmit}>
-          <label htmlFor="playlistName">New Playlist Name:</label>
-          <input 
-          type="text"
-          id="playlistName"
-          autoComplete="off"
-          value={playlistName}
-          onChange={(e) => setPlaylistName(e.target.value)}
-          />
-          <button>Submit</button>
-        </form> : null}
+        <div className="new-playlist-container">
+          <p id="create-playlist" onClick={handleClick}>{playlistForm ? "X Close" : "+ New Playlist"}</p>
+          {playlistForm ? 
+          <form className="new-playlist-form" onSubmit={handleNewPlaylistSubmit}>
+            <label htmlFor="playlistName">New Playlist Name:</label>
+            <input 
+            type="text"
+            id="playlistName"
+            autoComplete="off"
+            value={playlistName}
+            onChange={(e) => setPlaylistName(e.target.value)}
+            />
+            <button>Submit</button>
+          </form> : null}
+        </div>
         {myPlaylists}
         </div>
     }

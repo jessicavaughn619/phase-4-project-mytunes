@@ -10,15 +10,15 @@ const SongCard = ({ song, onAddToPlaylist }) => {
     }
 
     return (
-    <div className="song-card" onClick={handleClick}>
-        <div className="image-song">
+    <div className="song-card">
+        <div onClick={handleClick} className="image-song">
             <img src={image_url} alt={name}/>
             <div className="overlay">
                 <span className="icon">+</span>
             </div>
         </div>
         <div className="name">
-            {nameLimit}
+            {nameLimit} -
         </div>
         <div className="artist">
             {artist_name}

@@ -6,6 +6,7 @@
     background-color: $color-primary;
     overflow: scroll;
     height: 100vh;
+    padding: .5rem;
     margin: 2rem 2rem 2rem 0;
     .swiper {
         width: 100%;
@@ -26,8 +27,8 @@
 
     .swiper-slide img {
     display: block;
-    width: 100px;
-    height: 100px;
+    width: 125px;
+    height: 125px;
     object-fit: cover;
     }
 }

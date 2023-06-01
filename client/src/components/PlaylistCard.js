@@ -14,18 +14,25 @@ const PlaylistCard = ({ playlist, onDeletePlaylist }) => {
     }
 
   return (
-    <div className="playlist-names" onClick={handleClick}>
-      {isClickedPlaylist ? 
-      <div>
-        <div className="name">{name}</div>        
+    <div className="playlist-names">
+        <div className="name">
+          <h3>{name}</h3>
+          <h3 id="expand-collapse" onClick={handleClick}>{isClickedPlaylist ? "-" : "+"}</h3> 
+        </div>   
+          {isClickedPlaylist ?
+          <div>
           <ul>
             {songs.map((song) => (
-              <p>{song.name} - {song.artist_name}</p>))}
+              <div>
+                <p>{song.name} - {song.artist_name}</p>
+              </div>))}
           </ul>
-        <p onClick={handleDeleteClick} id={id}>Delete Playlist</p>
+        <div className="playlist-options">
+          <p className="edit">Edit Playlist</p>
+          <p className="delete" onClick={handleDeleteClick} id={id}>Delete Playlist</p>
         </div>
-      : <div className="name">
-      {name}</div>}
+        </div>
+      : null }
     </div>
   )
 }

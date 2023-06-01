@@ -1,11 +1,25 @@
 @import "../utilities/variables";
 
-.name:hover {
+.name {
+    display: flex;
+    justify-content: space-between;
+}
+
+#expand-collapse:hover {
     cursor: pointer;
     color: white;
 }
 
-p:hover {
-    cursor: pointer;
+.playlist-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit:hover, .delete:hover {
     color: white;
+    cursor: pointer;
+}
+
+.playlist-names {
+    margin: .75rem;
 }

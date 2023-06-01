@@ -9,13 +9,17 @@
     transition: transform 0.3s ease;
 }
 
-.genre-card :hover {
+.genre-card:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
 
+#genre-name:hover {
+    transform: none;
+}
+
 .genre-container {
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
     background: linear-gradient($random-perc, $color-bright, $color-dark-variant 100%);
 }
