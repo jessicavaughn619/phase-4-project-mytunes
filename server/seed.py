@@ -32,7 +32,7 @@ with app.app_context():
 
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": "Bearer BQB0Y5RIuTzZ_hJRgUjmWGsvrNueSZ0F6FXXb007SCKCy4lpUt7HWVL7bfjxXOqC0GyDMRPQSogOgl76Uy8dz-OWrFWofRaKYRydi-wz5xOg5qQPlc4"
+        "Authorization": "Bearer BQCV0Ckc5vRidgrVUw9s744UT2TeKLVW1uL77NsDZW2b3dW-ZZZmYWxBbCc3RQ0Km1U3ijpg5JdCnNMDMe9fIuQwdvRCyd4B9l0P-8ayPFNEHrczc84"
     }
     response = requests.get(url, headers=headers)
     data = response.json()

@@ -1,8 +1,8 @@
-"""Add tables, new songs relationship
+"""Add tables
 
-Revision ID: 08443bd0fef6
+Revision ID: 2a2f30cfb956
 Revises: 
-Create Date: 2023-05-31 12:17:18.137081
+Create Date: 2023-06-01 09:23:39.089941
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '08443bd0fef6'
+revision = '2a2f30cfb956'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -55,10 +55,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('playlist_songs',
-    sa.Column('playlist_id', sa.Integer(), nullable=True),
-    sa.Column('song_id', sa.Integer(), nullable=True),
+    sa.Column('playlist_id', sa.Integer(), nullable=False),
+    sa.Column('song_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['playlist_id'], ['playlists.id'], ),
-    sa.ForeignKeyConstraint(['song_id'], ['songs.id'], )
+    sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
+    sa.PrimaryKeyConstraint('playlist_id', 'song_id')
     )
     # ### end Alembic commands ###
 

@@ -35,10 +35,13 @@ class Playlists(Resource):
             name=name,
             user_id=session['user_id'],
         )
-
-        db.session.add(new_playlist)
-        db.session.commit()
-        return new_playlist.to_dict(), 201
+        try:
+            db.session.add(new_playlist)
+            db.session.commit()
+            return new_playlist.to_dict(), 201
+        
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
 
 class PlaylistByID(Resource):
     def delete(self, id):
@@ -62,10 +65,9 @@ class PlaylistSong(Resource):
 
             playlist.songs.append(song)
             db.session.commit()
-            return song.to_dict(), 201
         
         except IntegrityError:
-            return {'error': '422 Unprocessable Entity'}, 422
+            return {'error': '404 Playlist or Song not found'}, 404
     
 class Signup(Resource):
     def post(self):

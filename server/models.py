@@ -4,8 +4,8 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from config import bcrypt, db
 
 playlist_song = db.Table('playlist_songs',
-                          db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),
-                          db.Column('song_id', db.Integer, db.ForeignKey('songs.id')))
+                          db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id'), primary_key=True),
+                          db.Column('song_id', db.Integer, db.ForeignKey('songs.id'), primary_key=True))
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -57,7 +57,7 @@ class Artist(db.Model, SerializerMixin):
 class Song(db.Model, SerializerMixin):
     __tablename__ = "songs"
 
-    serialize_rules = ('-playlists.song', '-playlists.songs', )
+    serialize_rules = ('-playlists', '-artist', )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -74,8 +74,6 @@ class Song(db.Model, SerializerMixin):
     
 class Playlist(db.Model, SerializerMixin):
     __tablename__ = "playlists"
-
-    serialize_rules = ('-songs.playlist', '-songs.playlists')
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
