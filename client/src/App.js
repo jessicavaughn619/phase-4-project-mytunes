@@ -86,6 +86,20 @@ function App() {
     setSelectedSong(song)
   }
 
+  function handleAddSong(songId, playlistId) {
+    const allSongs = artists.flatMap(artist => (artist.songs))
+    const newSong = allSongs.find(song => song.id === songId)
+
+    const updatedPlaylists = playlists.map(playlist => {
+      if (playlist.id === parseInt(playlistId)) {
+        const updatedSongs = [...playlist.songs, newSong];
+        return {...playlist, songs: updatedSongs };
+      }
+      return playlist;
+    })
+    setPlaylists(updatedPlaylists)
+  }
+
   function handleAddNewPlaylist(newPlaylist) {
     const updatedPlaylists = [...playlists, newPlaylist]
     setPlaylists(updatedPlaylists)
@@ -119,6 +133,7 @@ function App() {
         onSetIsClicked={handleSetIsClicked}
         onAddNewPlaylist={handleAddNewPlaylist}
         onDeletePlaylist={handleDeletePlaylist}
+        onAddSong={handleAddSong}
         />}>
       </Route>
     </Routes>

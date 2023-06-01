@@ -3,7 +3,7 @@ import PlaylistCard from './PlaylistCard';
 import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist, 
-  selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, onDeletePlaylist }) => {
+  selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, onDeletePlaylist, onAddSong }) => {
     
     const [playlistForm, setPlaylistForm] = useState(false);
     const [playlistName, setPlaylistName] = useState("");
@@ -21,18 +21,19 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
     function handleSubmit(e) {
       e.preventDefault()
       const id = selectedPlaylist;
+      const songId = selectedSong;
+      const songData = { song_id: selectedSong };
       fetch(`/playlists/${id}/songs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-          song_id: selectedSong, 
-        }),
+        body: JSON.stringify(songData),
       }).then((r) => {
         if (r.ok) {
           console.log("Song added to playlist!");
           alert("Song added to playlist!");
+          onAddSong(songId, id)
         } else {
           throw new Error("Failed to add song to playlist");
         }

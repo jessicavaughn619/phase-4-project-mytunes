@@ -17,7 +17,7 @@ const PlaylistCard = ({ playlist, onDeletePlaylist }) => {
     <div className="playlist-names" onClick={handleClick}>
       {isClickedPlaylist ? 
       <div>
-        <div className="name">{name}</div>
+        <div className="name">{name}</div>        
           <ul>
             {songs.map((song) => (
               <p>{song.name} - {song.artist_name}</p>))}
