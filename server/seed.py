@@ -1,12 +1,7 @@
 import os
-from faker import Faker
 from config import db, app
 import requests
-import random
-from random import choice as rc
 from models import Song, Artist, User, Playlist, playlist_song
-
-fake = Faker()
 
 with app.app_context():
 
@@ -32,18 +27,29 @@ with app.app_context():
 
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": "Bearer BQCV0Ckc5vRidgrVUw9s744UT2TeKLVW1uL77NsDZW2b3dW-ZZZmYWxBbCc3RQ0Km1U3ijpg5JdCnNMDMe9fIuQwdvRCyd4B9l0P-8ayPFNEHrczc84"
+        "Authorization": "Bearer BQDHna_QwsMS4Tgf8K0OV2mKT1JdlQUYZivIXxishU03OLyi8BD7Voll6hcs3IVh4k0WERwyWpBuxO3lDcgHsOPqyySVz-TpOtAaSBdndBEVWXB5BS4"
     }
     response = requests.get(url, headers=headers)
     data = response.json()
 
-    artist_ids = {track['track']['artists'][0]['id'] for track in data['items']}
+    first_artist_ids = {track['track']['artists'][0]['id'] for track in data['items']}
+
+    url = "https://api.spotify.com/v1/playlists/37i9dQZF1DX0s5kDXi1oC5/tracks"
+    headers = {
+        "Authorization": "Bearer BQDHna_QwsMS4Tgf8K0OV2mKT1JdlQUYZivIXxishU03OLyi8BD7Voll6hcs3IVh4k0WERwyWpBuxO3lDcgHsOPqyySVz-TpOtAaSBdndBEVWXB5BS4"
+    }
+    response = requests.get(url, headers=headers)
+    more_data = response.json()
+
+    second_artist_ids = {track['track']['artists'][0]['id'] for track in more_data['items']}
+
+    combined_ids = first_artist_ids.union(second_artist_ids)
 
     def get_artist_data():
         artists = []
 
         print("Creating artist instances...")
-        for artist_id in list(artist_ids):
+        for artist_id in list(combined_ids):
             url = f"https://api.spotify.com/v1/artists/{artist_id}"
             response = requests.get(url, headers=headers)
             data = response.json()
@@ -59,7 +65,7 @@ with app.app_context():
 
     def create_song_instances():
         print("Creating song instances...")
-        for artist_id in list(artist_ids):
+        for artist_id in list(combined_ids):
             url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks?market=US"
             response = requests.get(url, headers=headers)
             data = response.json()
@@ -76,37 +82,8 @@ with app.app_context():
             db.session.add_all(songs)
         db.session.commit()
 
-    def create_users():
-        print('Creating new users...')
-        for n in range(10):
-            user = User(
-                first_name=fake.first_name(),
-                last_name=fake.last_name(),
-                username=fake.user_name(),
-                image_url=fake.image_url(100, 100)
-                )
-            users.append(user)
-        db.session.add_all(users)
-        db.session.commit()
-    
-    def create_playlists():
-        print('Creating new playlists...')
-        names = ["Jams", "Favorite Tunes", "Great Songs", "My Faves"]
-        songs = Song.query.all()
-        for n in range(5):
-            playlist = Playlist(
-                name=rc(names),
-                songs=random.sample(songs, 5)
-            )
-            playlists.append(playlist)
-        db.session.add_all(playlists)
-        db.session.commit()
-
-
     get_artist_data()
     create_song_instances()
-    create_users()
-    create_playlists()
     
     db.session.commit()
 
