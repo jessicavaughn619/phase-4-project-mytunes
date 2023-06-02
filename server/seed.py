@@ -27,7 +27,7 @@ with app.app_context():
 
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": "Bearer BQDHna_QwsMS4Tgf8K0OV2mKT1JdlQUYZivIXxishU03OLyi8BD7Voll6hcs3IVh4k0WERwyWpBuxO3lDcgHsOPqyySVz-TpOtAaSBdndBEVWXB5BS4"
+        "Authorization": "Bearer BQCQmyZfmmlORdL8T7DTnrm7IqoMJd0TXcLuYpsyOutUQVKMbP98gdhgaVZ1V6sNPtyhmfmmQ9AcAAZnkBU72Cx84K4s3QT6TLX5N3_bEPdK4hLH-fA"
     }
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -36,7 +36,7 @@ with app.app_context():
 
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DX0s5kDXi1oC5/tracks"
     headers = {
-        "Authorization": "Bearer BQDHna_QwsMS4Tgf8K0OV2mKT1JdlQUYZivIXxishU03OLyi8BD7Voll6hcs3IVh4k0WERwyWpBuxO3lDcgHsOPqyySVz-TpOtAaSBdndBEVWXB5BS4"
+        "Authorization": "Bearer BQCQmyZfmmlORdL8T7DTnrm7IqoMJd0TXcLuYpsyOutUQVKMbP98gdhgaVZ1V6sNPtyhmfmmQ9AcAAZnkBU72Cx84K4s3QT6TLX5N3_bEPdK4hLH-fA"
     }
     response = requests.get(url, headers=headers)
     more_data = response.json()
@@ -76,7 +76,8 @@ with app.app_context():
                     album=track['album']['name'],
                     artist_name=artist_name,
                     image_url=track["album"]["images"][0]["url"],
-                    artist_id=artist_id
+                    artist_id=artist_id,
+                    spotify_id=track['id']
                 )
                 songs.append(song)
             db.session.add_all(songs)

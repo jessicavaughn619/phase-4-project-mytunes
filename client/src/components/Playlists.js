@@ -22,6 +22,10 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       />
     ))
 
+    function handleCloseClick() {
+      onSetIsClicked(false)
+    }
+
     function handleSetIsAddedPlaylist() {
       setIsAddedPlaylist(true);
       setTimeout(() => {
@@ -91,9 +95,11 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
         <div className="confirm">
           <p>Successfully deleted playlist!</p>
         </div> : null}
-        {isClicked ? 
-        <form onSubmit={handleSubmit}>
-          <p>+ Song to Playlist:</p>
+        {isClicked ?
+        <div className="new-song-container"> 
+        <form onSubmit={handleSubmit} className="song-form">
+          <p className="song-form-close" onClick={handleCloseClick}>X Close</p>
+          <p>Add Song to Playlist:</p>
           <select value={selectedPlaylist} onChange={(e) => onSetSelectedPlaylist(e.target.value)}>
             <option value = "">
               --Select Playlist--
@@ -104,7 +110,7 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
             </option>))}
           </select>
           <button>Confirm Add Song</button>
-        </form> : null}
+        </form></div> : null}
         <div className="new-playlist-container">
           <p id="create-playlist" onClick={handleClick}>{playlistForm ? "X Close" : "+ New Playlist"}</p>
           {playlistForm ? 

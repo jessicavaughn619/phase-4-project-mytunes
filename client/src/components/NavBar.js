@@ -12,6 +12,7 @@ function NavBar({ user, onSetUser }) {
         }
 return (
   <div id="navbar-container-wrapper">
+    <h1>myTunes 🎵</h1>
     <p id="welcome">Welcome, {user.username}!</p>
     <div id="links">
       <h3><Link onClick={handleLogoutClick}>Logout</Link></h3>

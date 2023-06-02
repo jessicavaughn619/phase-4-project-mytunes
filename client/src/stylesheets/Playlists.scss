@@ -17,3 +17,30 @@
     color: white;
     cursor: pointer;
 }
+
+.new-song-container {
+    margin: .75rem;
+}
+
+.song-form-close {
+    margin-bottom: 0;
+}
+
+.song-form-close:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.song-form {
+    display: flex;
+    flex-direction: column;
+
+    select, option {
+        width: auto;
+    }
+
+    select {
+        padding: .25rem;
+        margin-bottom: 2rem;
+    }
+}

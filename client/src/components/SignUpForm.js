@@ -8,7 +8,6 @@ function SignUpForm({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +28,6 @@ function SignUpForm({ onLogin }) {
         username,
         password,
         password_confirmation: passwordConfirmation,
-        image_url: imageUrl,
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -96,15 +94,6 @@ function SignUpForm({ onLogin }) {
             autoComplete="current-password"
           />
           </div>
-        <div id="imageurl-input">
-          <label htmlFor="imageUrl">Profile Image</label>
-          <input
-            type="text"
-            id="imageUrl"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-        </div>
         <div id="submit-button">
           <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
         </div>

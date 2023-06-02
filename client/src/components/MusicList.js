@@ -12,7 +12,9 @@ import 'swiper/scss/scrollbar';
 const MusicList = ({ artists, onSetArtist, isLoading, 
   onAddToPlaylist, search, onSearch }) => {
 
-  const filteredMusic = artists.filter((artist) => (artist.name.toLowerCase().includes(search.toLowerCase())));
+  const filteredMusic = artists
+  .filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()))
+  .sort((a, b) => a.name.localeCompare(b.name));
   
   const genres = [];
   filteredMusic.map((artist) => (genres.push(artist.genres)));

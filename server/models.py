@@ -17,7 +17,6 @@ class User(db.Model, SerializerMixin):
     last_name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
-    image_url = db.Column(db.String)
 
     playlists = db.relationship('Playlist', backref='user')
 
@@ -64,6 +63,7 @@ class Song(db.Model, SerializerMixin):
     artist_name = db.Column(db.String, nullable=False)
     album = db.Column(db.String, nullable=False)
     image_url = db.Column(db.String, nullable=False)
+    spotify_id = db.Column(db.String, nullable=False)
 
     playlists = db.relationship('Playlist', secondary=playlist_song, back_populates='songs')
 

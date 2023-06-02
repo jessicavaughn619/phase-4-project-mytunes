@@ -39,12 +39,14 @@ const PlaylistCard = ({ playlist, onDeletePlaylist, onDeleteSong }) => {
             {songs.map((song) => (
               <div className="edit-container">
                 {isEditPlaylist? 
-                <div>
+                <div className="track">
                   <p className="delete-song" id={song.id} onClick={handleDeleteSong}>X</p>
-                </div> : null}
-                <div>
                   <p>{song.name} - {song.artist_name}</p>
-                </div>
+                </div> :
+                <div className="track">
+                  <a href={`https://open.spotify.com/track/${song.spotify_id}`} target="_blank" rel="noreferrer">🎵</a>
+                  <p>{song.name} - {song.artist_name}</p>
+                </div>}
               </div>))}
           </ul>
         <div className="playlist-options">

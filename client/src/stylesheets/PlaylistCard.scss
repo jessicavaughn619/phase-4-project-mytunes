@@ -39,7 +39,7 @@
 }
 
 .playlist-items {
-    padding-left: 3rem;
+    padding-left: 0;
 }
 .edit-playlist {
     padding-left: 0;
@@ -53,4 +53,9 @@
 .delete-song:hover {
     cursor: pointer;
     color: white;
+}
+
+.track {
+    display: flex;
+    flex-direction: row;
 }

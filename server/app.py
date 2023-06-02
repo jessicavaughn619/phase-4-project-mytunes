@@ -91,13 +91,11 @@ class Signup(Resource):
         last_name= request_json.get('last_name')
         username = request_json.get('username')
         password = request_json.get('password')
-        image_url = request_json.get('image_url')
 
         user = User(
             first_name=first_name,
             last_name=last_name,
             username=username,
-            image_url=image_url
         )
 
         user.password_hash = password
