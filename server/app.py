@@ -87,8 +87,8 @@ class Signup(Resource):
     def post(self):
         request_json = request.get_json()
 
-        first_name = request_json.get('first_name')
-        last_name= request_json.get('last_name')
+        first_name = request_json.get('firstName')
+        last_name= request_json.get('lastName')
         username = request_json.get('username')
         password = request_json.get('password')
 

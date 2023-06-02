@@ -6,7 +6,7 @@ import '../stylesheets/NewPlaylistForm.scss'
 const NewPlaylistForm = ({onIsAddedPlaylist, onAddNewPlaylist, onPlaylistForm }) => {
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("playlist must have a name").max(15),
+        name: yup.string().required("Playlist must have a name").max(25, "Playlist name cannot be longer than 25 characters"),
     });
 
     const formik = useFormik({
