@@ -2,7 +2,6 @@ import React from 'react';
 import '../stylesheets/ArtistCard.scss';
 
 const ArtistCard = ({ artist, onSetArtist }) => {
-
   const { name, image_url, id } = artist;
 
   function handleClick() {

@@ -8,7 +8,8 @@ function Home({ user, onSetUser, artists, playlists,
     onSetArtist, isLoading, onAddToPlaylist, 
     onSetSelectedPlaylist, selectedPlaylist, isClicked, 
     selectedSong, onSetIsClicked, onAddNewPlaylist, onDeletePlaylist, 
-    onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist }) {
+    onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist, 
+    search, onSearch }) {
 
     return (
         <div id="home-container-wrapper">
@@ -40,6 +41,8 @@ function Home({ user, onSetUser, artists, playlists,
                     onSetArtist={onSetArtist}
                     isLoading={isLoading}
                     onAddToPlaylist={onAddToPlaylist}
+                    search={search}
+                    onSearch={onSearch}
                     />
             </div>
         </div>

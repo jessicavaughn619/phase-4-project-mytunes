@@ -22,3 +22,10 @@
     width: 125px;
     background: linear-gradient($random-perc, $color-bright, $color-dark-variant 100%);
 }
+
+.active-genre-card {
+    height: 125px;
+    width: 125px;
+    background: linear-gradient($random-perc, $color-dark-variant, $color-primary-light 100%);
+    color: $color-bright;
+}

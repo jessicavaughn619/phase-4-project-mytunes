@@ -5,21 +5,45 @@
     flex-direction: column;
     height: 10rem;
     align-items: center;
+
+    .name {
+        font-size: 16px;
+        cursor: default;
+    }
+    
+    .image {
+        height: 125px;
+        width: 125px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .image:hover {
+        transform: scale(1.1);
+    }
 }
 
-.name {
-    font-size: 16px;
-    cursor: default;
-}
+.active-artist-card {
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    align-items: center;
 
-.image {
-    height: 125px;
-    width: 125px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
+    .image {
+        height: 125px;
+        width: 125px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .image:hover {
+        transform: scale(1.1);
+    }
 
-.image:hover {
-    transform: scale(1.1);
+    .name {
+        font-size: 16px;
+        cursor: default;
+        color: $color-bright;
+    }
 }
   

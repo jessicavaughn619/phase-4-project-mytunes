@@ -19,6 +19,7 @@ function App() {
   const [selectedSong, setSelectedSong] = useState(null);
   const [isDeletedSong, setIsDeletedSong] = useState(false);
   const [isDeletedPlaylist, setIsDeletedPlaylist] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -168,6 +169,8 @@ function App() {
         onDeleteSong={handleDeleteSong}
         isDeletedSong={isDeletedSong}
         isDeletedPlaylist={isDeletedPlaylist}
+        search={search}
+        onSearch={setSearch}
         />}>
       </Route>
     </Routes>
