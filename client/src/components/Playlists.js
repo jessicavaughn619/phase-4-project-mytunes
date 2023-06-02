@@ -4,10 +4,12 @@ import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist, 
   selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, 
-  onDeletePlaylist, onAddSong, onDeleteSong }) => {
+  onDeletePlaylist, onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist }) => {
     
     const [playlistForm, setPlaylistForm] = useState(false);
     const [playlistName, setPlaylistName] = useState("");
+    const [isAddedPlaylist, setIsAddedPlaylist] = useState(false);
+    const [isAddedSong, setIsAddedSong] = useState(false);
     
     const selectPlaylists = playlists.filter((playlist) => (playlist.user_id === user.id))
 
@@ -19,6 +21,20 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       onDeleteSong={onDeleteSong}
       />
     ))
+
+    function handleSetIsAddedPlaylist() {
+      setIsAddedPlaylist(true);
+      setTimeout(() => {
+        setIsAddedPlaylist(false);
+      }, 5000);
+    }
+
+    function handleSetIsAddedSong() {
+      setIsAddedSong(true);
+      setTimeout(() => {
+        setIsAddedSong(false);
+      }, 5000);
+    }
 
     function handleSubmit(e) {
       e.preventDefault()
@@ -33,8 +49,7 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
         body: JSON.stringify(songData),
       }).then((r) => {
         if (r.ok) {
-          alert("Song added to playlist!");
-          onAddSong(songId, id)
+          onAddSong(songId, id);
         } else {
           throw new Error("Failed to add song to playlist");
         }
@@ -46,6 +61,7 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       .finally(() => {
         onSetIsClicked(false);
         onSetSelectedPlaylist('')
+        handleSetIsAddedSong()
       });
     }
 
@@ -65,9 +81,11 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
         }),
       }).then((r) => r.json())
       .then((newPlaylist) => onAddNewPlaylist(newPlaylist))
-      alert("New playlist added!")
-      setPlaylistName("")
-      setPlaylistForm(false)
+      .finally(() => {
+        setPlaylistName("")
+        setPlaylistForm(false)
+        handleSetIsAddedPlaylist()
+      });
     }
 
   return (
@@ -76,6 +94,22 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
     {isLoading ? <h1>Loading</h1> : 
       <div>
         <h2>My Playlists</h2>
+        {isAddedPlaylist ? 
+        <div className="confirm">
+          <p>Successfully created new playlist!</p>
+        </div> : null}
+        {isAddedSong ? 
+        <div className="confirm">
+          <p>Successfully added song to playlist!</p>
+        </div> : null}
+        {isDeletedSong ? 
+        <div className="confirm">
+          <p>Successfully deleted song from playlist!</p>
+        </div> : null}
+        {isDeletedPlaylist ? 
+        <div className="confirm">
+          <p>Successfully deleted playlist!</p>
+        </div> : null}
         {isClicked ? 
         <form onSubmit={handleSubmit}>
           <p>+ Song to Playlist:</p>

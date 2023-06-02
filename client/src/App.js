@@ -17,6 +17,8 @@ function App() {
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   const [isClicked, setIsClicked] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
+  const [isDeletedSong, setIsDeletedSong] = useState(false);
+  const [isDeletedPlaylist, setIsDeletedPlaylist] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -105,20 +107,33 @@ function App() {
     setPlaylists(updatedPlaylists)
   }
 
+  function handleSetIsDeletedPlaylist() {
+    setIsDeletedPlaylist(true);
+    setTimeout(() => {
+      setIsDeletedPlaylist(false);
+    }, 5000);
+  }
+
+  function handleSetIsDeletedSong() {
+    setIsDeletedSong(true);
+    setTimeout(() => {
+      setIsDeletedSong(false);
+    }, 5000);
+  }
+
   function handleDeletePlaylist(id) {
     fetch(`/playlists/${id}`, {
       method: "DELETE"
     })
-    alert("Playlist deleted!")
     const updatedPlaylists = playlists.filter((playlist) => (playlist.id !== id))
     setPlaylists(updatedPlaylists)
+    handleSetIsDeletedPlaylist()
 }
 
   function handleDeleteSong(songId, id) {
     fetch(`/playlists/${id}/songs/${songId}`, {
       method: "DELETE"
     })
-    alert("Song deleted from playlist!")
     const updatedPlaylists = playlists.map(playlist => {
       if (playlist.id === id) {
         const updatedSongs = playlist.songs.filter(song => (song.id !== parseInt(songId)))
@@ -127,6 +142,7 @@ function App() {
       return playlist;
     })
     setPlaylists(updatedPlaylists)
+    handleSetIsDeletedSong()
   }
 
   return (
@@ -150,6 +166,8 @@ function App() {
         onDeletePlaylist={handleDeletePlaylist}
         onAddSong={handleAddSong}
         onDeleteSong={handleDeleteSong}
+        isDeletedSong={isDeletedSong}
+        isDeletedPlaylist={isDeletedPlaylist}
         />}>
       </Route>
     </Routes>

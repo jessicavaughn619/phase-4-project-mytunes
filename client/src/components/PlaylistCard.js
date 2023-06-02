@@ -53,7 +53,7 @@ const PlaylistCard = ({ playlist, onDeletePlaylist, onDeleteSong }) => {
         </div>
           {isDeleteClicked ? 
           <div className="delete-confirm">
-            <p>Confirm Delete?</p>
+            <p>Confirm Delete Playlist?</p>
             <p id="yes-delete" onClick={handleConfirmDeleteClick}>Yes</p>
             <p id="no-delete" onClick={handleFirstDeleteClick}>No</p>
           </div>: null}

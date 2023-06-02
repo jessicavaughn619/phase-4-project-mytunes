@@ -8,7 +8,7 @@ function Home({ user, onSetUser, artists, playlists,
     onSetArtist, isLoading, onAddToPlaylist, 
     onSetSelectedPlaylist, selectedPlaylist, isClicked, 
     selectedSong, onSetIsClicked, onAddNewPlaylist, onDeletePlaylist, 
-    onAddSong, onDeleteSong }) {
+    onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist }) {
 
     return (
         <div id="home-container-wrapper">
@@ -30,6 +30,8 @@ function Home({ user, onSetUser, artists, playlists,
                     onDeletePlaylist={onDeletePlaylist}
                     onAddSong={onAddSong}
                     onDeleteSong={onDeleteSong}
+                    isDeletedSong={isDeletedSong}
+                    isDeletedPlaylist={isDeletedPlaylist}
                     />
                 </div>
                 </div>
