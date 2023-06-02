@@ -27,7 +27,7 @@ with app.app_context():
 
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DXadOVCgGhS7j/tracks"
     headers = {
-        "Authorization": "Bearer BQCQmyZfmmlORdL8T7DTnrm7IqoMJd0TXcLuYpsyOutUQVKMbP98gdhgaVZ1V6sNPtyhmfmmQ9AcAAZnkBU72Cx84K4s3QT6TLX5N3_bEPdK4hLH-fA"
+        "Authorization": os.environ.get('AUTH')
     }
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -36,7 +36,7 @@ with app.app_context():
 
     url = "https://api.spotify.com/v1/playlists/37i9dQZF1DX0s5kDXi1oC5/tracks"
     headers = {
-        "Authorization": "Bearer BQCQmyZfmmlORdL8T7DTnrm7IqoMJd0TXcLuYpsyOutUQVKMbP98gdhgaVZ1V6sNPtyhmfmmQ9AcAAZnkBU72Cx84K4s3QT6TLX5N3_bEPdK4hLH-fA"
+        "Authorization": os.environ.get('AUTH')
     }
     response = requests.get(url, headers=headers)
     more_data = response.json()
