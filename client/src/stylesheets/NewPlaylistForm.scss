@@ -1,0 +1,29 @@
+@import "../utilities/variables";
+
+.new-playlist-form {
+    display: flex;
+    flex-direction: column;
+
+    label, input {
+        width: auto;
+    }
+
+    label {
+        margin-bottom: 1rem;
+    }
+
+    input {
+        padding: .25rem;
+    }
+
+    .errors {
+        color: $color-bright;
+        font-weight: 500;
+    }
+
+    button:hover {
+        background-color: $color-bright;
+    }
+
+
+}

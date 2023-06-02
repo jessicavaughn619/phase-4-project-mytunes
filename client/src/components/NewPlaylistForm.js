@@ -1,11 +1,12 @@
 import React from "react";
 import { useFormik } from 'formik';
 import * as yup from "yup";
+import '../stylesheets/NewPlaylistForm.scss'
 
 const NewPlaylistForm = ({onIsAddedPlaylist, onAddNewPlaylist, onPlaylistForm }) => {
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("Must enter a playlist name").max(15),
+        name: yup.string().required("playlist must have a name").max(15),
     });
 
     const formik = useFormik({
@@ -31,7 +32,7 @@ const NewPlaylistForm = ({onIsAddedPlaylist, onAddNewPlaylist, onPlaylistForm })
 
   return (
     <form className="new-playlist-form" onSubmit={formik.handleSubmit}>
-      <label htmlFor="name">New Playlist Name</label>
+      <label htmlFor="name">New Playlist Name:</label>
       <input
         type="text"
         id="name"
@@ -39,6 +40,7 @@ const NewPlaylistForm = ({onIsAddedPlaylist, onAddNewPlaylist, onPlaylistForm })
         onChange={formik.handleChange}
         value={formik.values.name}
       />
+      <p className="errors">{formik.errors.name}</p>
       <button type="submit">Submit</button>
     </form>
   );
