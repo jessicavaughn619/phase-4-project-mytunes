@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PlaylistCard from './PlaylistCard';
+import NewPlaylistForm from './NewPlaylistForm';
 import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist, 
@@ -7,7 +8,6 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
   onDeletePlaylist, onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist }) => {
     
     const [playlistForm, setPlaylistForm] = useState(false);
-    const [playlistName, setPlaylistName] = useState("");
     const [isAddedPlaylist, setIsAddedPlaylist] = useState(false);
     const [isAddedSong, setIsAddedSong] = useState(false);
     
@@ -68,25 +68,6 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
     function handleClick() {
      setPlaylistForm(playlistForm => !playlistForm)
     }
-    
-    function handleNewPlaylistSubmit(e) {
-      e.preventDefault()
-      fetch('/playlists', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-          name: playlistName, 
-        }),
-      }).then((r) => r.json())
-      .then((newPlaylist) => onAddNewPlaylist(newPlaylist))
-      .finally(() => {
-        setPlaylistName("")
-        setPlaylistForm(false)
-        handleSetIsAddedPlaylist()
-      });
-    }
 
   return (
     <>
@@ -127,17 +108,10 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
         <div className="new-playlist-container">
           <p id="create-playlist" onClick={handleClick}>{playlistForm ? "X Close" : "+ New Playlist"}</p>
           {playlistForm ? 
-          <form className="new-playlist-form" onSubmit={handleNewPlaylistSubmit}>
-            <label htmlFor="playlistName">New Playlist Name:</label>
-            <input 
-            type="text"
-            id="playlistName"
-            autoComplete="off"
-            value={playlistName}
-            onChange={(e) => setPlaylistName(e.target.value)}
-            />
-            <button>Submit</button>
-          </form> : null}
+          <NewPlaylistForm 
+          onIsAddedPlaylist={handleSetIsAddedPlaylist}
+          onAddNewPlaylist={onAddNewPlaylist}
+          onPlaylistForm={setPlaylistForm}/> : null}
         </div>
         {myPlaylists}
         </div>
