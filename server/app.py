@@ -44,6 +44,23 @@ class Playlists(Resource):
             return {'error': '422 Unprocessable Entity'}, 422
 
 class PlaylistByID(Resource):
+    def get(self, id):
+        playlist = Playlist.query.filter_by(id=id).first().to_dict()
+        return make_response(jsonify(playlist), 200)
+    
+    def patch(self, id):
+        playlist = Playlist.query.filter_by(id=id).first()
+
+        request_json = request.get_json()
+
+        for attr in request_json:
+            setattr(playlist, attr, request_json[attr])
+
+        db.session.add(playlist)
+        db.session.commit()
+
+        return make_response(playlist.to_dict(), 200)
+    
     def delete(self, id):
         playlist = Playlist.query.filter_by(id=id).first()
         if playlist:
@@ -69,7 +86,7 @@ class PlaylistSong(Resource):
         except IntegrityError:
             return {'error': '404 Playlist or Song not found'}, 404
 
-class PlaylistSongByID(Resource):
+class PlaylistSongByID(Resource):    
     def delete(self, songId, id):
 
         try:

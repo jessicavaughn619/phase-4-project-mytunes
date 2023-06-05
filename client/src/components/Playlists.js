@@ -5,12 +5,12 @@ import '../stylesheets/Playlists.scss';
 
 const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist, 
   selectedPlaylist, isClicked, selectedSong, onSetIsClicked, onAddNewPlaylist, 
-  onDeletePlaylist, onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist }) => {
+  onDeletePlaylist, onAddSong, onDeleteSong, isDeletedSong, isDeletedPlaylist, onEditPlaylistName }) => {
     
     const [playlistForm, setPlaylistForm] = useState(false);
     const [isAddedPlaylist, setIsAddedPlaylist] = useState(false);
     const [isAddedSong, setIsAddedSong] = useState(false);
-    
+
     const selectPlaylists = playlists.filter((playlist) => (playlist.user_id === user.id))
 
     const myPlaylists = selectPlaylists.map((playlist) => (
@@ -19,6 +19,8 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       playlist={playlist}
       onDeletePlaylist={onDeletePlaylist}
       onDeleteSong={onDeleteSong}
+      onEditPlaylistName={onEditPlaylistName}
+      onSetPlaylistForm={setPlaylistForm}
       />
     ))
 

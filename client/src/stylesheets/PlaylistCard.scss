@@ -45,6 +45,19 @@
     padding-left: 0;
 }
 
+.edit-playlist-name {
+    display: flex;
+
+    #playlist-name {
+        margin-right: .5rem;
+    }
+
+    #edit-playlist-pencil:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+}
+
 .delete-song {
     padding-left: 1.2em;
     padding-right: 1.2rem;

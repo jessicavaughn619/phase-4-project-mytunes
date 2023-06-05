@@ -146,6 +146,17 @@ function App() {
     handleSetIsDeletedSong()
   }
 
+  function handleEditPlaylistName(playlist) {
+    const { id, name } = playlist;
+    const updatedPlaylists = playlists.map(playlist => {
+      if (playlist.id === id) {
+        return {...playlist, name: name};
+      }
+      return playlist;
+    });
+    setPlaylists(updatedPlaylists)
+  }
+
   return (
     <div id="app-container-wrapper">
     {user ? 
@@ -171,6 +182,7 @@ function App() {
         isDeletedPlaylist={isDeletedPlaylist}
         search={search}
         onSearch={setSearch}
+        onEditPlaylistName={handleEditPlaylistName}
         />}>
       </Route>
     </Routes>

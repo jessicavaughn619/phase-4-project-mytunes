@@ -77,9 +77,9 @@ function SignUpForm({ onLogin }) {
             value={formik.values.firstName}
             onChange={formik.handleChange}
           />
-          {formik.errors.firstName && (
+          {formik.errors.firstName && formik.touched.firstName ? (
           <div className="error">{formik.errors.firstName}</div>
-        )}
+        ) : null}
         </div>
         <div id="lastname-input">
           <label htmlFor="lastName">Last Name</label>
@@ -91,9 +91,9 @@ function SignUpForm({ onLogin }) {
             value={formik.values.lastName}
             onChange={formik.handleChange}
           />
-          {formik.errors.lastName && (
+          {formik.errors.lastName && formik.touched.lastName ? (
           <div className="error">{formik.errors.lastName}</div>
-        )}
+        ) : null}
         </div>
         <div id="username_input">
           <label htmlFor="username">Username</label>
@@ -105,9 +105,9 @@ function SignUpForm({ onLogin }) {
             value={formik.values.username}
             onChange={formik.handleChange}
           />
-          {formik.errors.username && (
+          {formik.errors.username && formik.touched.username ? (
           <div className="error">{formik.errors.username}</div>
-        )}
+        ) : null}
         </div>
         <div id="password-input">
           <label htmlFor="password">Password</label>
@@ -118,9 +118,9 @@ function SignUpForm({ onLogin }) {
             value={formik.values.password}
             onChange={formik.handleChange}
           />
-          {formik.errors.password && (
+          {formik.errors.password && formik.touched.password ? (
           <div className="error">{formik.errors.password}</div>
-        )}
+        ) : null}
         </div>
         <div id="password-confirmation-input">
           <label htmlFor="passwordConfirmation">Password Confirmation</label>
@@ -131,9 +131,9 @@ function SignUpForm({ onLogin }) {
             value={formik.values.passwordConfirmation}
             onChange={formik.handleChange}
           />
-          {formik.errors.passwordConfirmation && (
+          {formik.errors.passwordConfirmation && formik.touched.passwordConfirmation ? (
           <div className="error">{formik.errors.passwordConfirmation}</div>
-        )}
+        ) : null}
           </div>
         <div id="submit-button">
           <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
