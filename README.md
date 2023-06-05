@@ -6,16 +6,13 @@ myTunes is a React-Flask full-stack application that allows authenticated users 
 
 For local installation, fork and clone this repository, then cd into your project folder and run the following commands:
 
-```npm install --prefix client
-```
+`npm install --prefix client`
 
-```pipenv install requirements.txt && pipenv shell
-```
+`pipenv install requirements.txt && pipenv shell`
 
 To run both front and backend applications simultaneously, run the following command:
 
-```honcho start -f Procfile.dev
-```
+`honcho start -f Procfile.dev`
 
 The React front end will be available at localhost:4000; the Flask backend will be available at localhost:5555
 
