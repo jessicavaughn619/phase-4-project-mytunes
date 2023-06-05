@@ -16,7 +16,7 @@ const PlaylistCard = ({ playlist, onDeletePlaylist, onDeleteSong,
       setIsUpdatedPlaylist(true)
       setTimeout(() => {
         setIsUpdatedPlaylist(false);
-      }, 5000);
+      }, 3000);
     }
 
     function handleClick() {

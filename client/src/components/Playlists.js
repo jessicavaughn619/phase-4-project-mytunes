@@ -10,6 +10,7 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
     const [playlistForm, setPlaylistForm] = useState(false);
     const [isAddedPlaylist, setIsAddedPlaylist] = useState(false);
     const [isAddedSong, setIsAddedSong] = useState(false);
+    const [isError, setIsError] = useState(false)
 
     const selectPlaylists = playlists.filter((playlist) => (playlist.user_id === user.id))
 
@@ -32,14 +33,21 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       setIsAddedPlaylist(true);
       setTimeout(() => {
         setIsAddedPlaylist(false);
-      }, 5000);
+      }, 3000);
     }
 
     function handleSetIsAddedSong() {
       setIsAddedSong(true);
       setTimeout(() => {
         setIsAddedSong(false);
-      }, 5000);
+      }, 3000);
+    }
+
+    function handleSetError() {
+      setIsError(true);
+      setTimeout(() => {
+        setIsError(false);
+      }, 3000);
     }
 
     function handleSubmit(e) {
@@ -56,18 +64,18 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
       }).then((r) => {
         if (r.ok) {
           onAddSong(songId, id);
+          handleSetIsAddedSong()
         } else {
           throw new Error("Failed to add song to playlist");
         }
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to add song to playlist");
+        handleSetError();
       })
       .finally(() => {
         onSetIsClicked(false);
         onSetSelectedPlaylist('')
-        handleSetIsAddedSong()
       });
     }
 
@@ -96,6 +104,10 @@ const Playlists = ({ isLoading, user, playlists, onSetSelectedPlaylist,
         {isDeletedPlaylist ? 
         <div className="confirm">
           <p>Successfully deleted playlist!</p>
+        </div> : null}
+        {isError ? 
+        <div className="error">
+          <p>Must create a playlist before adding songs!</p>
         </div> : null}
         {isClicked ?
         <div className="new-song-container"> 
