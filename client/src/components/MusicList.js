@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ArtistCard from './ArtistCard';
 import SongCard from './SongCard';
 import GenreCard from './GenreCard';
