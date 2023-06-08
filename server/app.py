@@ -9,7 +9,7 @@ api = Api(app)
 
 @app.route('/')
 def index():
-    return '<h1>Back End Development</h1>'
+    return '<h1>myTunes Back End Development</h1>'
 
 class Users(Resource):
     def get(self):
@@ -105,6 +105,7 @@ class PlaylistSong(Resource):
 
             playlist.songs.append(song)
             db.session.commit()
+            return {"message": "Song successfully added to playlist"}, 201
         
         except IntegrityError:
             return {'error': '404 Playlist or Song not found'}, 404
@@ -118,7 +119,7 @@ class PlaylistSongByID(Resource):
 
             playlist.songs.remove(song)
             db.session.commit()
-            return {'message': 'Song deleted from playlist'}, 200
+            return {'message': 'Song deleted from playlist'}, 204
 
         except IntegrityError:
             return {'error': '404 Playlist or Song not found'}, 404
