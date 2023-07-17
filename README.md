@@ -2,6 +2,10 @@
 
 myTunes is a React-Flask full-stack application that allows authenticated users to create unique playlists, add songs from the database, then play their selected songs through the Spotify web application. Each user can deploy full CRUD operations on their own playlists to put together incredible playlists with all their favorite songs.
 
+## Walkthrough
+
+<a href="https://www.youtube.com/watch?v=DFA_5AwnnIw" title="myTunes Music Application Walkthrough"><img src="./client/src/images/myTunes-play.jpeg" height="200px" alt="myTunes Walkthrough" /></a>
+
 ## Installation
 
 For local installation, fork and clone this repository, then cd into your project folder and run the following commands:
